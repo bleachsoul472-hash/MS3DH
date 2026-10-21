@@ -1,0 +1,1 @@
+See README_AR.md for Arabic setup instructions. Never publish bot tokens in frontend files.

@@ -159,7 +159,7 @@ async function discordStatus() {
       adminsCount: admins,
       moderatorsCount: moderators,
       message:
-        "تُحدّث أعداد Discord تلقائيًا. أضف معرّفات الرتب في متغيرات Netlify لاحتساب الإدارة والمودريترز.",
+        "الادارة والمودريترز.",
       checkedAt: new Date().toISOString(),
     };
   } catch {

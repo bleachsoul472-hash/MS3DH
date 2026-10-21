@@ -31,7 +31,7 @@ async function fetchJson(url, options = {}) {
 }
 
 async function kickStatus() {
-  const slug = (process.env.KICK_CHANNEL_SLUG || "i5vb").trim();
+  const slug = (process.env.KICK_CHANNEL_SLUG || "biixa").trim();
 
   try {
     const data = await fetchJson(

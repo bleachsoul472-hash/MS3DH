@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MS3DH · Official Website</title>
+<style>
+:root{--bg:#080808;--panel:#121212;--panel2:#1b1b1b;--line:#353535;--text:#f1eeee;--muted:#a39a9a;--green:#ff4545;--accent:#ff4545;--red:#ff4545;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+:root[data-theme="day"]{--bg:#f3f3f3;--panel:#ffffff;--panel2:#f7f7f7;--line:#d8d8d8;--text:#171717;--muted:#666;--green:#c81924;--accent:#c81924;--red:#c81924}
+:root[data-theme="day"] body{background:var(--bg);color:var(--text)}
+:root[data-theme="day"] header{background:#ffffffed}
+:root[data-theme="day"] .ticker{background:#fafafa;color:#555}
+:root[data-theme="day"] .hero{background:radial-gradient(ellipse at 72% 30%,#efb4b4 0,transparent 27%),radial-gradient(ellipse at 70% 65%,#f4dede 0,transparent 48%),linear-gradient(115deg,#fff 12%,#f7e8e8 55%,#f8f8f8 100%)}
+:root[data-theme="day"] .hero:before{background:repeating-linear-gradient(0deg,transparent 0 47px,#00000008 48px),repeating-linear-gradient(90deg,transparent 0 79px,#00000007 80px)}
+:root[data-theme="day"] .hero:after{color:#00000007}
+:root[data-theme="day"] .hero p,:root[data-theme="day"] .sectionHead p,:root[data-theme="day"] .card p,:root[data-theme="day"] .vehicleInfo p,:root[data-theme="day"] .request p{color:#5f5f5f}
+:root[data-theme="day"] .stat,:root[data-theme="day"] .card,:root[data-theme="day"] .request,:root[data-theme="day"] .vehicle{background:#fff}
+:root[data-theme="day"] .vehicleArt{background:radial-gradient(ellipse at 55% 65%,#d8aaaa55,transparent 42%),linear-gradient(145deg,#f5e8e8,#fff)}
+:root[data-theme="day"] .navlinks a:hover,:root[data-theme="day"] .navlinks a.active{background:#f5e5e5;color:#111}
+:root[data-theme="day"] .rosterTools input,:root[data-theme="day"] .rosterTools select,:root[data-theme="day"] .filterBtns button,:root[data-theme="day"] .vehicleNav button{background:#fff;color:#222}
+:root[data-theme="day"] th{background:#f1e5e5;color:#4c3333}
+:root[data-theme="day"] td{color:#242424}
+:root[data-theme="day"] tbody tr:hover{background:#fff0f0}
+:root[data-theme="day"] .modalBox{background:#fff}
+:root[data-theme="day"] .modalBox input{background:#fafafa;color:#111}
+:root[data-theme="day"] .btn{background:#c81924;color:#fff;border-color:#c81924}
+:root[data-theme="day"] .btn.secondary{background:#fff;color:#222;border-color:#ccc}
+:root[data-theme="day"] .badgeicon{background:#ffe7e7;color:#c81924;border-color:#c81924}
+:root[data-theme="day"] .avatar{background:#ffe7e7;border-color:#e0b3b3;color:#8d1010}
+:root[data-theme="day"] .pill{border-color:#d9a4a4;color:#a0151e}
+:root[dir="rtl"] body{font-family:Tahoma,Arial,sans-serif}
+:root[dir="rtl"] .nav,:root[dir="rtl"] .sectionHead,:root[dir="rtl"] .heroFoot,:root[dir="rtl"] .footer{direction:rtl}
+:root[dir="rtl"] table{text-align:right}
+:root[dir="rtl"] .ticker{direction:rtl}
+:root[dir="rtl"] .heroMeta{direction:rtl}
+:root[dir="rtl"] .rosterTools,:root[dir="rtl"] .filterBtns{direction:rtl}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.55 Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.mono,.eyebrow,.tag,.navnum,.statlabel{font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}.topline{height:4px;background:linear-gradient(90deg,#750909,#ff3030,#750909)}header{position:sticky;top:0;z-index:20;background:#090f0fee;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{max-width:1440px;margin:auto;display:flex;align-items:center;gap:22px;padding:13px 26px}.brand{display:flex;align-items:center;gap:11px;min-width:205px}.badgeicon{width:37px;height:42px;border:1px solid #7e9b83;display:grid;place-items:center;color:var(--green);clip-path:polygon(50% 0,95% 16%,88% 72%,50% 100%,12% 72%,5% 16%);background:#260b0b;font-weight:900}.brand strong{display:block;font-size:12px;letter-spacing:.13em}.brand small{color:var(--muted);font:10px var(--mono);letter-spacing:.1em}.navlinks{display:flex;gap:4px;flex:1;overflow:auto}.navlinks a{white-space:nowrap;padding:10px 11px;color:#9ba9a2;font:10px var(--mono);letter-spacing:.06em;border:1px solid transparent}.navlinks a:hover,.navlinks a.active{color:var(--text);border-color:var(--line);background:#16201d}.navright{display:flex;align-items:center;gap:10px}.live{font:10px var(--mono);color:var(--green);white-space:nowrap}.live:before{content:"";display:inline-block;width:6px;height:6px;background:#9ed7a9;border-radius:50%;margin-right:7px;box-shadow:0 0 9px #9ed7a9}.lang,.menuBtn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:8px 10px;font:10px var(--mono)}.menuBtn{display:none}.ticker{border-bottom:1px solid var(--line);color:#8b9a92;display:flex;gap:28px;overflow:hidden;white-space:nowrap;padding:8px 26px;font:10px var(--mono);letter-spacing:.1em}.ticker b{color:var(--green);font-weight:500}.wrap{max-width:1440px;margin:auto;padding:0 26px}.hero{min-height:590px;position:relative;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 72% 30%,#314439 0,transparent 27%),radial-gradient(ellipse at 70% 65%,#291010 0,transparent 48%),linear-gradient(115deg,#0a1110 12%,#17221d 55%,#080e0d 100%)}.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 47px,#ffffff08 48px),repeating-linear-gradient(90deg,transparent 0 79px,#ffffff07 80px);mask-image:linear-gradient(to bottom,black,transparent)}.hero:after{content:"MRPD";position:absolute;right:-2%;top:3%;font-size:clamp(120px,24vw,330px);font-weight:900;letter-spacing:-.1em;color:#ffffff05;line-height:1}.heroInner{position:relative;z-index:1;padding:76px 0 54px;width:100%}.heroMeta{display:flex;gap:12px;align-items:center;color:#9caea2;font:10px var(--mono);letter-spacing:.13em}.dot{color:var(--green)}h1{font-size:clamp(43px,7vw,94px);line-height:.95;letter-spacing:-.065em;margin:25px 0 18px;max-width:850px;font-weight:600}h1 em{font-style:normal;color:var(--green)}.hero p{color:#a8b5ad;max-width:540px;font-size:15px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid #78927d;background:#e32626;color:#fff;padding:13px 17px;font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase}.btn.secondary{background:#101916;color:var(--text);border-color:var(--line)}.btn:hover{filter:brightness(1.12)}.heroFoot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:65px;padding-top:18px;border-top:1px solid #ffffff20;color:#85958b;font:10px var(--mono);letter-spacing:.1em}.heroFoot strong{color:#dfe9e1;font-weight:500}.section{padding:76px 0;border-bottom:1px solid var(--line)}.sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:27px}.eyebrow{color:var(--green);font-size:10px}.section h2{font-size:clamp(28px,4vw,48px);letter-spacing:-.05em;line-height:1.05;font-weight:550;margin:10px 0 0}.sectionHead p{max-width:400px;color:var(--muted);margin:0;font-size:13px}.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}.stat{padding:23px;border-right:1px solid var(--line);background:linear-gradient(145deg,#111a17,#0b1110)}.stat:last-child{border:0}.statlabel{color:var(--muted);font-size:10px}.statnum{font-size:clamp(28px,4vw,44px);letter-spacing:-.06em;margin:11px 0 2px}.statdesc{font-size:11px;color:#839188}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{border:1px solid var(--line);background:linear-gradient(140deg,#121b18,#0d1312);padding:22px;min-width:0}.cardtop{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font:10px var(--mono);letter-spacing:.09em}.rankline{height:1px;background:var(--line);margin:19px 0}.card h3{font-size:21px;font-weight:550;letter-spacing:-.035em;margin:0 0 5px}.card p{color:var(--muted);font-size:12px;margin:0}.person{display:flex;gap:13px;align-items:center;margin-top:20px}.avatar{width:42px;height:42px;display:grid;place-items:center;background:#351010;border:1px solid #6b2929;color:#ffe0e0;font:13px var(--mono)}.person strong{display:block;font-size:12px}.person small{color:var(--muted);font:10px var(--mono)}.unitCard{min-height:205px;position:relative;overflow:hidden}.unitCode{font:52px var(--mono);letter-spacing:-.08em;color:#e4eee50e;position:absolute;right:8px;bottom:6px}.unitCard .count{font:11px var(--mono);color:var(--green);margin-top:19px}.vehicle{display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--line);background:#101715;min-height:320px}.vehicleArt{min-height:280px;background:radial-gradient(ellipse at 55% 65%,#8b202055,transparent 42%),linear-gradient(145deg,#241010,#0c1210);display:grid;place-items:center;position:relative;overflow:hidden}.vehicleArt:before{content:"";position:absolute;width:80%;height:1px;background:#8ea89155;transform:rotate(-25deg)}.car{font-size:clamp(76px,12vw,150px);filter:grayscale(1);opacity:.78;z-index:1}.vehicleInfo{padding:clamp(20px,4vw,42px);display:flex;flex-direction:column;justify-content:center}.vehicleInfo h3{font-size:clamp(27px,4vw,43px);letter-spacing:-.055em;line-height:1.03;margin:14px 0}.vehicleInfo p{color:var(--muted);font-size:13px}.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:17px 0}.spec{border:1px solid var(--line);padding:10px}.spec small{display:block;color:var(--muted);font:9px var(--mono)}.spec b{font:12px var(--mono)}.vehicleNav{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.vehicleNav button{background:#101715;color:#9aaba0;border:1px solid var(--line);padding:10px 12px;font:10px var(--mono)}.vehicleNav button.active{color:var(--green);border-color:#6b8971}.rosterTools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}.rosterTools input,.rosterTools select{background:#0d1412;color:var(--text);border:1px solid var(--line);padding:12px;min-width:0}.rosterTools input{flex:1;min-width:190px}.filterBtns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.filterBtns button{background:#0d1412;color:#91a096;border:1px solid var(--line);padding:8px 12px;font:10px var(--mono)}.filterBtns button.active{background:#e32626;color:#fff;border-color:#e32626}.tableWrap{overflow:auto;border:1px solid var(--line)}table{width:100%;border-collapse:collapse;min-width:760px;text-align:left}th{font:10px var(--mono);color:#91a096;text-transform:uppercase;letter-spacing:.07em;background:#111a17}td,th{padding:14px 15px;border-bottom:1px solid #26332e}td{font-size:12px;color:#c9d4cd}tbody tr:hover{background:#14201a}.rank{color:var(--green);font:10px var(--mono)}.pill{border:1px solid #3b5142;padding:4px 7px;color:#b6d0bc;font:9px var(--mono);white-space:nowrap}.points{font:12px var(--mono)}.tableFoot{display:flex;justify-content:space-between;color:var(--muted);font:10px var(--mono);padding:13px 0}.requestGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.request{border:1px solid var(--line);padding:24px;background:#101715}.request h3{font-size:22px;font-weight:500;margin:14px 0 8px}.request p{color:var(--muted);font-size:13px}.request .btn{margin-top:12px}.footer{padding:30px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font:10px var(--mono);letter-spacing:.06em}.footer strong{color:#dce7de}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#e32626;color:#fff;padding:12px 18px;font:11px var(--mono);opacity:0;pointer-events:none;transition:.25s;z-index:50}.toast.show{opacity:0!important;visibility:hidden!important;transform:translate(-50%,20px)!important}.modal{position:fixed;inset:0;z-index:40;background:#000b;display:none;place-items:center;padding:18px}.modal.show{display:grid}.modalBox{width:min(470px,100%);background:#101815;border:1px solid var(--line);padding:25px}.modalBox h3{font-size:25px;margin:8px 0}.modalBox p{color:var(--muted);font-size:13px}.modalBox input{width:100%;margin:7px 0;background:#080e0c;color:white;border:1px solid var(--line);padding:12px}.modalBtns{display:flex;gap:8px;margin-top:14px}
+@media(max-width:1050px){.nav{gap:12px}.brand{min-width:auto}.navlinks a{padding:9px 8px}.live{display:none}.hero{min-height:540px}.grid3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.nav{padding:11px 15px;flex-wrap:wrap}.brand{flex:1}.menuBtn{display:block}.navlinks{display:none;order:4;flex-basis:100%;flex-direction:column;overflow:visible}.navlinks.open{display:flex}.navlinks a{padding:12px;border-bottom:1px solid var(--line)}.navright{gap:6px}.wrap{padding:0 15px}.ticker{padding:8px 15px}.hero{min-height:580px}.heroInner{padding:65px 0 30px}h1{font-size:clamp(44px,13vw,72px)}.heroFoot{margin-top:43px;gap:12px}.section{padding:54px 0}.sectionHead{align-items:flex-start;flex-direction:column}.stats{grid-template-columns:repeat(2,1fr)}.stat{padding:17px;border-bottom:1px solid var(--line)}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}.grid3{grid-template-columns:1fr}.vehicle{grid-template-columns:1fr}.vehicleArt{min-height:210px}.vehicleInfo{padding:23px}.requestGrid{grid-template-columns:1fr}.tableFoot{gap:10px;flex-wrap:wrap}.brand strong{font-size:11px}}
+
+/* Strong day-mode overrides for elements that previously used fixed dark colors */
+:root[data-theme="day"] header{background:#fffffff2!important;color:#171717}
+:root[data-theme="day"] .navlinks a{color:#555}
+:root[data-theme="day"] .navlinks a:hover,:root[data-theme="day"] .navlinks a.active{background:#f5e6e6;color:#171717}
+:root[data-theme="day"] .ticker{background:#fafafa;color:#555}
+:root[data-theme="day"] .heroMeta,:root[data-theme="day"] .hero p,:root[data-theme="day"] .heroFoot{color:#555}
+:root[data-theme="day"] .heroFoot strong{color:#222}
+:root[data-theme="day"] .stat{background:linear-gradient(145deg,#fff,#f5f5f5)}
+:root[data-theme="day"] .statdesc{color:#666}
+:root[data-theme="day"] .card{background:linear-gradient(140deg,#fff,#f7f7f7)}
+:root[data-theme="day"] .avatar{background:#fae7e7;border-color:#e8b9b9;color:#8e111b}
+:root[data-theme="day"] .vehicle{background:#fff}
+:root[data-theme="day"] .vehicleArt{background:radial-gradient(ellipse at 55% 65%,#e7a5a555,transparent 42%),linear-gradient(145deg,#fff0f0,#f4f4f4)}
+:root[data-theme="day"] .vehicleNav button{background:#fff;color:#555}
+:root[data-theme="day"] .rosterTools input,:root[data-theme="day"] .rosterTools select{background:#fff;color:#171717;border-color:#d4d4d4}
+:root[data-theme="day"] .filterBtns button{background:#fff;color:#555;border-color:#d4d4d4}
+:root[data-theme="day"] th{background:#f1f1f1;color:#555}
+:root[data-theme="day"] td{color:#333}
+:root[data-theme="day"] tbody tr:hover{background:#fff0f0}
+:root[data-theme="day"] .pill{border-color:#e5b9b9;color:#8e111b}
+:root[data-theme="day"] .request{background:#fff}
+:root[data-theme="day"] .modalBox{background:#fff;color:#171717}
+:root[data-theme="day"] .modalBox input{background:#fff;color:#171717;border-color:#d4d4d4}
+:root[data-theme="day"] .btn.secondary{background:#fff;color:#171717}
+:root[data-theme="day"] .badgeicon{border-color:#d28c8c}
+:root[data-theme="day"] .unitCode{color:#1717170b}
+:root[data-theme="day"] .themeToggle,:root[data-theme="day"] #themeToggle{background:#fff;color:#8e111b;border-color:#d4b0b0}
+
+
+.platformLinks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.platformLink{min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-decoration:none!important;color:var(--text,#f5f5f5);border:1px solid var(--line,#333);border-radius:14px;background:var(--card,rgba(255,255,255,.025));transition:transform .2s,border-color .2s,background .2s;font-weight:800;letter-spacing:.04em}
+.platformLink:hover{transform:translateY(-3px);border-color:#ff4545;background:rgba(255,55,55,.07)}
+.platformLink svg{width:32px;height:32px;fill:#ff4545;color:#ff4545;flex-shrink:0}
+.platformLink span{font-size:14px}
+@media(max-width:600px){.platformLinks{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.platformLink{min-height:96px;gap:8px}.platformLink svg{width:28px;height:28px}.platformLink span{font-size:12px}}
+
+
+/* Animated streamer polish */
+body::before{content:"";position:fixed;inset:-25%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 18% 22%,rgba(255,35,55,.10),transparent 28%),radial-gradient(circle at 82% 68%,rgba(255,35,55,.07),transparent 30%);animation:ambientDrift 18s ease-in-out infinite alternate}
+@keyframes ambientDrift{0%{transform:translate3d(-2%,0,0) rotate(0deg)}100%{transform:translate3d(2%,-2%,0) rotate(7deg)}}
+@keyframes softFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes redPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,50,65,.0)}50%{box-shadow:0 0 24px 2px rgba(255,50,65,.16)}}
+@keyframes revealUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero .heroVisual,.hero .heroCard,.stat,.platformLink,.videoCard,.newsCard{animation:revealUp .7s ease both}
+.platformLink:nth-child(2){animation-delay:.06s}.platformLink:nth-child(3){animation-delay:.12s}.platformLink:nth-child(4){animation-delay:.18s}.platformLink:nth-child(5){animation-delay:.24s}
+.platformLink:hover svg{transform:scale(1.12) rotate(-4deg)}
+.platformLink svg{transition:transform .25s ease}
+button,a,.card,.stat{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+#liveClock{font-variant-numeric:tabular-nums;letter-spacing:.08em}
+.clockPill{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(255,65,75,.35);border-radius:999px;background:rgba(255,45,60,.07);font-size:13px;color:var(--text,#fff);backdrop-filter:blur(10px)}
+.clockDot{width:7px;height:7px;border-radius:50%;background:#ff4545;box-shadow:0 0 12px #ff4545;animation:redPulse 2s infinite}
+.liveClockWrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:20px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+
+.section,.sectionHead,.platformLink{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}.section.is-visible,.sectionHead.is-visible,.platformLink.is-visible{opacity:1;transform:translateY(0)}
+
+/* Header layout refinement: keep brand and controls on one row where possible */
+.nav{gap:clamp(7px,1.2vw,18px)}
+.brand{flex:0 0 auto;min-width:max-content;gap:9px}
+.brand>span:last-child{white-space:nowrap}
+.navright{flex:0 0 auto;white-space:nowrap}
+@media(max-width:1050px){.nav{flex-wrap:wrap}.brand{order:0}.navright{order:1;margin-left:auto}.navlinks{order:2;flex-basis:100%;max-width:100%}}
+@media(max-width:600px){.nav{padding:10px 12px;gap:8px}.brand strong{font-size:12px}.brand small{font-size:8px}.badgeicon{width:34px;height:36px}.navright{gap:4px}.navright .lang{padding:7px 6px;font-size:9px}.navlinks{gap:2px}.navlinks a{padding:7px 8px;font-size:9px}}
+</style>
+
+<style>
+:root{--red:#ef2929;--green:#ef2929}
+.badgeicon{color:#ff4545;border-color:#7b2929;background:#260b0b}
+.navlinks a:hover,.navlinks a.active{background:#211112!important;border-color:#542121!important;color:#fff!important}
+.live{color:#ff5353}.live:before,.dot{background:#ff4545;color:#ff4545}
+.hero{background:radial-gradient(ellipse at 72% 30%,#5a1818 0,transparent 27%),radial-gradient(ellipse at 70% 65%,#291010 0,transparent 48%),linear-gradient(115deg,#0a0a0b 12%,#211113 55%,#080808 100%)}
+.hero:after{content:"LIVE";right:-1%;top:3%;color:#ffffff06}
+.btn{border-color:#852323;background:#e32626}
+.eyebrow,.rankline+.count,.statlabel{color:#ff5555}
+.card{background:linear-gradient(140deg,#191214,#0d0d0f)}
+.stat{background:linear-gradient(145deg,#1b1214,#0b0b0d)}
+.section{scroll-margin-top:80px}
+.supportNav{color:#ff5b5b!important;border-color:#6e2828!important}
+.clipArt{height:145px;margin:18px 0;background:radial-gradient(circle at center,#79202066,transparent 55%),linear-gradient(135deg,#241214,#0c0c0e);border:1px solid var(--line);display:grid;place-items:center;color:#ff4a4a;font-size:42px}
+.textLink{display:inline-block;margin-top:18px;color:#ff5555;font:10px var(--mono);letter-spacing:.08em}
+.newsList{border-top:1px solid var(--line)}
+.newsItem{display:grid;grid-template-columns:140px 1fr auto;align-items:start;gap:20px;padding:23px 12px;border-bottom:1px solid var(--line)}
+.newsDate{font:10px var(--mono);letter-spacing:.08em;color:#ff5555}
+.newsItem h3{margin:0 0 5px;font-size:19px;font-weight:550}
+.newsItem p{margin:0;color:var(--muted);font-size:12px}
+.livePanel{display:grid;grid-template-columns:1.3fr .7fr;border:1px solid var(--line);background:var(--panel)}
+.liveScreen{min-height:320px;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#5c161644,transparent 55%),linear-gradient(135deg,#211214,#080809);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;color:#a99a9a;font:10px var(--mono);letter-spacing:.08em;text-align:center;padding:0}.liveScreen iframe,.liveScreen .offlineStreamImage{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}.liveScreen .offlineStreamImage{display:block}.liveScreen .liveOverlay{position:relative;z-index:2;padding:12px;background:#0008;border-radius:10px;color:#fff;pointer-events:none}.liveScreen .liveOverlay[hidden]{display:none}.liveScreen .playCircle{position:relative;z-index:2}
+.playCircle{width:68px;height:68px;border:1px solid #e33;border-radius:50%;display:grid;place-items:center;color:#ff4b4b;font-size:24px;padding-left:4px}
+.liveInfo{padding:clamp(22px,4vw,42px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.liveInfo h3{font-size:clamp(25px,4vw,38px);line-height:1.05;margin:13px 0}
+.liveInfo p{font-size:13px;color:var(--muted);margin:0 0 20px}
+.supportIcon{font-size:28px;color:#ff4b4b;margin:4px 0 16px}
+:root[data-theme="day"]{--bg:#f4f4f5;--panel:#fff;--text:#191919;--muted:#686868;--line:#dedede;--green:#c91f28}
+:root[data-theme="day"] body{background:var(--bg);color:var(--text)}
+:root[data-theme="day"] header{background:#ffffffed!important;border-color:#ddd}
+:root[data-theme="day"] .brand small,:root[data-theme="day"] .navlinks a{color:#555}
+:root[data-theme="day"] .navlinks a:hover,:root[data-theme="day"] .navlinks a.active{background:#fae8e8!important;color:#222!important}
+:root[data-theme="day"] .ticker{background:#fff;color:#666}
+:root[data-theme="day"] .hero{background:radial-gradient(ellipse at 72% 30%,#ffdada 0,transparent 27%),linear-gradient(115deg,#fff 12%,#f7e9ea 55%,#fff 100%);color:#171717}
+:root[data-theme="day"] .heroMeta,:root[data-theme="day"] .hero p,:root[data-theme="day"] .heroFoot{color:#555}
+:root[data-theme="day"] .heroFoot strong{color:#222}
+:root[data-theme="day"] .btn.secondary{background:#fff;color:#222;border-color:#d7b4b4}
+:root[data-theme="day"] .stat,:root[data-theme="day"] .card,:root[data-theme="day"] .request{background:linear-gradient(140deg,#fff,#f8f8f8);border-color:#ddd}
+:root[data-theme="day"] .statdesc,:root[data-theme="day"] .card p,:root[data-theme="day"] .sectionHead p{color:#666}
+:root[data-theme="day"] .clipArt,:root[data-theme="day"] .liveScreen{background:linear-gradient(135deg,#fff0f0,#f2f2f2);color:#555}
+:root[data-theme="day"] .livePanel{background:#fff}
+:root[data-theme="day"] .liveInfo p,:root[data-theme="day"] .newsItem p{color:#666}
+:root[data-theme="day"] .lang{background:#fff;color:#8d1a20;border-color:#d8b7b7}
+:root[data-theme="day"] .footer{color:#666}
+@media(max-width:760px){.navright{gap:5px}.navright .lang{padding:8px 7px;font-size:9px}.newsItem{grid-template-columns:1fr auto;gap:8px}.newsDate{grid-column:1/-1}.livePanel{grid-template-columns:1fr}.liveScreen{min-height:220px}.supportNav{display:inline-flex}}
+</style>
+
+
+<style>
+.supportFormWrap{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:stretch}.supportForm,.supportSide{border:1px solid var(--line);background:linear-gradient(145deg,#191214,#0c0c0e);padding:clamp(20px,4vw,38px);min-width:0}.formIntro{display:flex;align-items:center;gap:13px;margin-bottom:25px;padding-bottom:20px;border-bottom:1px solid var(--line)}.formIcon{width:46px;height:46px;border:1px solid #6e2828;color:#ff5555;display:grid;place-items:center;font-size:23px;background:#ff45450d}.formIntro strong,.formIntro small{display:block}.formIntro strong{letter-spacing:.08em;font:12px var(--mono)}.formIntro small{color:var(--muted);margin-top:5px;font-size:12px}.supportForm label{display:block;margin:15px 0 7px;color:var(--muted);font-size:12px}.supportForm input,.supportForm select,.supportForm textarea{width:100%;background:#09090b;color:var(--text);border:1px solid var(--line);padding:13px 14px;border-radius:7px;outline:none}.supportForm input:focus,.supportForm select:focus,.supportForm textarea:focus{border-color:#ff4545;box-shadow:0 0 0 3px #ff45451a}.supportForm textarea{resize:vertical;min-height:120px}.supportForm .btn{width:100%;margin-top:20px;border-radius:7px}.formNote{font-size:11px;color:var(--muted);margin:12px 0 0}.supportSide{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:430px}.supportSideGlow{position:absolute;right:-20px;top:-55px;font-size:260px;color:#ff45450b;line-height:1;pointer-events:none}.supportSide>*:not(.supportSideGlow){position:relative}.supportSide h3{font-size:clamp(28px,4vw,44px);line-height:1.05;letter-spacing:-.05em;margin:16px 0}.supportSide p{color:var(--muted);max-width:390px;line-height:1.9}.supportTypes{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0 28px}.supportTypes span{padding:8px 10px;border:1px solid var(--line);font:10px var(--mono);color:#ff7373;border-radius:5px}.searchPanel{position:fixed;z-index:60;top:82px;left:50%;transform:translateX(-50%);width:min(650px,calc(100% - 28px));padding:14px;background:var(--panel);border:1px solid var(--line);box-shadow:0 20px 70px #0009;border-radius:12px;animation:revealUp .2s ease}.searchPanel[hidden]{display:none}.searchPanel form{display:flex;align-items:center;gap:9px}.searchPanel form>span{font-size:25px;color:#ff5555}.searchPanel input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);padding:12px;color:var(--text);border-radius:7px}.searchResults{padding-top:8px;max-height:45vh;overflow:auto}.searchResults a,.searchResults p{display:block;padding:10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--text)}.searchResults a:hover{background:#ff454512;color:#ff6565}.searchToggle{font-size:19px;line-height:1;padding:5px 11px;color:#ff6666}h1{animation:revealUp .8s ease both}.hero p{animation:revealUp 1s .1s ease both}.hero .actions{animation:revealUp 1.1s .16s ease both}:root[data-theme="day"] .supportForm,:root[data-theme="day"] .supportSide{background:linear-gradient(145deg,#fff,#f8f8f8)}:root[data-theme="day"] .supportForm input,:root[data-theme="day"] .supportForm select,:root[data-theme="day"] .supportForm textarea,:root[data-theme="day"] .searchPanel input{background:#fff;color:#222}@media(max-width:760px){.supportFormWrap{grid-template-columns:1fr}.supportSide{min-height:300px}.searchPanel{top:75px}.searchPanel form .lang{padding:8px}}
+</style>
+
+<style>
+/* Responsive polish for phone, tablet and desktop */
+html{overflow-x:hidden}
+body{overflow-x:hidden}
+img,svg,video,canvas{max-width:100%}
+.nav{min-width:0}
+.navlinks{min-width:0}
+.navright{flex-shrink:0}
+.supportLanding{display:flex;align-items:center;gap:22px;padding:clamp(20px,4vw,36px);border:1px solid var(--line);background:linear-gradient(135deg,#191214,#0c0c0e);flex-wrap:wrap}
+.supportLandingIcon{width:58px;height:58px;display:grid;place-items:center;border:1px solid #6e2828;color:#ff5555;font-size:27px;flex-shrink:0}
+.supportLanding>div:nth-child(2){flex:1;min-width:220px}
+.supportLanding h3{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
+.supportLanding p{margin:0;color:var(--muted);line-height:1.8}
+.supportLanding .btn{flex-shrink:0}
+@media(max-width:760px){
+  .nav{gap:8px}
+  .brand{min-width:0}
+  .brand small{font-size:8px;letter-spacing:.04em}
+  .navright{flex-wrap:wrap;justify-content:flex-end}
+  .navright .lang{padding:8px 7px}
+  .hero{min-height:unset}
+  .heroInner{padding-top:48px;padding-bottom:28px}
+  .heroMeta{flex-wrap:wrap;gap:7px;font-size:9px}
+  h1{overflow-wrap:anywhere;letter-spacing:-.045em}
+  .hero p{font-size:14px}
+  .actions .btn{flex:1 1 100%;width:100%}
+  .heroFoot{font-size:9px}
+  .supportLanding{align-items:flex-start;gap:14px}
+  .supportLanding>div:nth-child(2){min-width:calc(100% - 76px)}
+  .supportLanding .btn{width:100%}
+}
+@media(max-width:390px){
+  .nav{padding:10px}
+  .badgeicon{width:31px;height:35px}
+  .brand{gap:7px}
+  .brand strong{font-size:10px}
+  .navright{gap:4px}
+  .searchToggle{font-size:16px!important}
+  .ticker{font-size:9px;gap:18px}
+  .stat{padding:13px}
+}
+</style>
+
+
+<style>
+/* Final responsive cleanup */
+:root{--green:#ff4545;--line:#29272b;--bg:#0b0b0e;--panel:#111114;--text:#f4f3f4;--muted:#a5a2a5}
+body{max-width:100%;overflow-x:hidden}
+main,header,.ticker,.footer,.wrap{min-width:0}
+.hero{background:radial-gradient(ellipse at 72% 55%,#451313 0,transparent 47%),linear-gradient(115deg,#09090b 12%,#1a0d0e 58%,#09090b 100%)}
+.hero:after{content:"MS3DH";right:0;max-width:100%;overflow:hidden}
+h1{max-width:100%;overflow-wrap:normal;word-break:normal}
+@media(max-width:760px){
+ .nav{gap:8px}
+ .navright{display:flex;flex-wrap:wrap;gap:5px;margin-inline-start:auto}
+ .navright .lang{padding:8px 7px;font-size:9px}
+ .brand{flex:1 1 120px}
+ .hero{min-height:0;display:block}
+ .heroInner{padding:48px 0 28px}
+ .heroMeta{display:flex;flex-wrap:wrap;font-size:9px;line-height:1.8}
+ h1{font-size:clamp(37px,10.4vw,64px);line-height:1.02;letter-spacing:-.045em;margin:23px 0 17px}
+ .hero p{font-size:15px;line-height:1.8;max-width:100%}
+ .heroFoot{margin-top:35px;font-size:9px}
+ .liveClockWrap{position:relative!important;right:auto!important;bottom:auto!important;display:flex;flex-wrap:wrap;padding:0 15px 18px}
+ .supportLanding{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:20px}
+ .supportLanding>div:nth-child(2){min-width:0;flex:1}
+ .supportLanding .btn{width:100%}
+}
+@media(max-width:390px){
+ .nav{padding:10px}
+ .brand small{font-size:8px;letter-spacing:0}
+ .navright{gap:4px}
+ .navright .lang{padding:7px 6px}
+ h1{font-size:clamp(34px,10vw,42px)}
+}
+#supportMain{min-height:70vh;animation:revealUp .25s ease both}
+#supportMain[hidden],#homeMain[hidden]{display:none!important}
+.supportPageWrap{max-width:1050px;margin:auto;padding:clamp(24px,6vw,65px) 20px}
+.supportPageHead{margin-bottom:25px}
+.supportPageHead h1{font-size:clamp(34px,6vw,60px);margin:12px 0}
+.supportPageHead p{color:var(--muted);max-width:650px;line-height:1.9}
+.supportPageGrid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.supportForm,.supportSide{border:1px solid var(--line);background:linear-gradient(145deg,#191214,#0c0c0e);padding:clamp(18px,4vw,34px);min-width:0}
+.supportForm label{display:block;margin:15px 0 7px;color:var(--muted);font-size:12px}
+.supportForm input,.supportForm select,.supportForm textarea{width:100%;min-width:0;background:#09090b;color:var(--text);border:1px solid var(--line);padding:13px;border-radius:7px}
+.supportForm textarea{min-height:130px;resize:vertical}
+.supportForm .btn{width:100%;margin-top:18px}
+.supportSide h2{font-size:clamp(26px,4vw,42px);line-height:1.1;margin:15px 0}
+.supportSide p{color:var(--muted);line-height:1.9}
+.supportTypes{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0}
+.supportTypes span{border:1px solid var(--line);padding:8px 11px;color:#ff7373;font:10px var(--mono)}
+.supportNotice{color:var(--muted);font-size:11px;line-height:1.8}
+@media(max-width:700px){.supportPageGrid{grid-template-columns:1fr}.supportSide{order:2}.supportPageWrap{padding:28px 15px}}
+:root[data-theme="day"] .supportForm,:root[data-theme="day"] .supportSide{background:#fff}
+:root[data-theme="day"] .supportForm input,:root[data-theme="day"] .supportForm select,:root[data-theme="day"] .supportForm textarea{background:#fff;color:#222}
+</style>
+
+
+<style>
+.supportLandingLink{display:flex;color:inherit;text-decoration:none;cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.supportLandingLink:hover{border-color:#a63838;transform:translateY(-2px);background:linear-gradient(135deg,#241315,#0c0c0e)}
+.supportCardArrow{font-size:28px;color:#ff5555;margin-inline-start:auto;align-self:center}
+.supportLandingLink:focus-visible{outline:2px solid #ff5555;outline-offset:4px}
+@media(max-width:760px){.supportCardArrow{margin-inline-start:auto}.supportLandingLink{width:100%}}
+</style>
+
+<style id="mobile-layout-final-fix">
+/* Final layout fix: keep the original hero, but prevent clipped content on phones */
+html,body{width:100%;max-width:100%;overflow-x:clip}
+*,*::before,*::after{box-sizing:border-box}
+.wrap{width:100%;max-width:1440px;margin-inline:auto}
+.hero{width:100%;overflow:hidden}
+.heroInner{width:100%;min-width:0}
+.heroMeta{max-width:100%;overflow-wrap:anywhere}
+h1{width:100%;max-width:100%;white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none}
+h1 em{white-space:nowrap}
+.hero p{width:100%;max-width:540px;overflow-wrap:break-word}
+.actions{width:100%;align-items:stretch}
+.actions .btn{max-width:100%;min-width:0;white-space:normal;text-align:center}
+@media(max-width:760px){
+ .wrap{padding-inline:16px}
+ .hero{min-height:0;display:block}
+ .heroInner{padding:44px 0 25px}
+ .heroMeta{font-size:9px;letter-spacing:.09em;gap:7px;line-height:1.7}
+ h1{font-size:clamp(32px,9.2vw,48px);line-height:1.06;letter-spacing:-.04em;margin:22px 0 18px}
+ .hero p{font-size:15px;line-height:1.75;max-width:100%;margin:0}
+ .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:25px}
+ .actions .btn{width:100%;min-height:54px;padding:14px 12px}
+ .heroFoot{margin-top:34px;padding-top:15px;gap:10px;line-height:1.7}
+}
+@media(max-width:390px){
+ .wrap{padding-inline:14px}
+ h1{font-size:clamp(30px,8.8vw,36px);letter-spacing:-.035em}
+ .heroMeta{font-size:8px;letter-spacing:.06em}
+ .hero p{font-size:14px}
+}
+</style>
+
+
+<style id="top-time-and-motion">
+.timeDateBar{position:sticky;top:0;z-index:30;background:rgba(12,12,15,.94);backdrop-filter:blur(16px);border-bottom:1px solid #ff45453b;color:var(--text);box-shadow:0 5px 24px #0002}
+.timeDateInner{max-width:1440px;margin:auto;min-height:42px;padding:7px 26px;display:flex;align-items:center;justify-content:center;gap:20px;font:11px var(--mono);letter-spacing:.06em}
+.timeDateItem{display:inline-flex;align-items:center;gap:9px;white-space:nowrap}
+.timeDateItem strong{color:#ff6268;font-variant-numeric:tabular-nums;font-size:12px}
+.timeLabel{color:var(--muted);font-size:9px;letter-spacing:.13em}
+.timeDateDivider{height:18px;width:1px;background:#ff45454d}
+.timeDateItem:first-child strong{min-width:83px}
+header{top:42px}
+.timeDateBar .clockDot{display:inline-block;flex-shrink:0}
+.hero:before{animation:gridSlide 24s linear infinite}
+.hero:after{animation:heroWordGlow 5s ease-in-out infinite alternate}
+@keyframes gridSlide{from{background-position:0 0,0 0}to{background-position:0 94px,158px 0}}
+@keyframes heroWordGlow{from{transform:translateY(0);opacity:.7}to{transform:translateY(12px);opacity:1}}
+@keyframes neonSweep{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes cardHoverFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes redShimmer{0%{box-shadow:0 0 0 rgba(255,69,69,0)}50%{box-shadow:0 0 22px rgba(255,69,69,.12)}100%{box-shadow:0 0 0 rgba(255,69,69,0)}}
+.platformLink{background:linear-gradient(120deg,var(--panel),#241014,var(--panel));background-size:220% 220%;animation:neonSweep 9s ease infinite}
+.card:hover,.stat:hover{transform:translateY(-4px);border-color:#ff45456b;box-shadow:0 12px 32px #ff454510}
+.badgeicon{animation:redShimmer 4s ease-in-out infinite}
+.playCircle{animation:redPulse 2.2s infinite}
+.clipArt{position:relative;overflow:hidden}
+.clipArt:after{content:"";position:absolute;inset:-60% auto -60% -30%;width:25%;transform:rotate(22deg);background:linear-gradient(90deg,transparent,#ff45451c,transparent);animation:clipSweep 5s ease-in-out infinite}
+@keyframes clipSweep{0%,30%{left:-30%}75%,100%{left:130%}}
+:root[data-theme="day"] .timeDateBar{background:rgba(255,255,255,.95);border-color:#e8b6b6}
+@media(max-width:760px){.timeDateInner{min-height:39px;padding:6px 10px;gap:13px;font-size:10px}.timeDateItem{gap:6px}.timeDateItem strong{font-size:11px}.timeDateItem:first-child strong{min-width:72px}header{top:39px}.liveClockWrap{display:none!important}}
+@media(prefers-reduced-motion:reduce){.hero:before,.hero:after,.platformLink,.badgeicon,.playCircle,.clipArt:after{animation:none!important}}
+
+/* In-site admin dashboard */
+.adminLaunch{position:fixed;z-index:9998;left:50%;transform:translateX(-50%);bottom:14px;border:1px solid #ff6464;background:linear-gradient(135deg,#ff4545,#b91c32);color:#fff;border-radius:999px;padding:13px 23px;font-weight:900;letter-spacing:.2px;box-shadow:0 10px 34px #0009,0 0 0 5px #ff45451c;cursor:pointer;display:flex;align-items:center;gap:9px;transition:transform .2s,box-shadow .2s}.adminLaunch:hover{transform:translateX(-50%) translateY(-3px);box-shadow:0 14px 38px #000a,0 0 0 7px #ff454522}
+.adminOverlay{position:fixed;inset:0;z-index:10000;background:#080808eF;backdrop-filter:blur(10px);display:none;overflow:auto;padding:14px;color:#f5f5f5;direction:rtl}.adminOverlay.open{display:block}.adminShell{max-width:1180px;margin:20px auto;background:linear-gradient(145deg,#151515,#0b0b0d);border:1px solid #383838;border-radius:22px;overflow:hidden;box-shadow:0 24px 90px #000a}.adminTop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid #333;position:sticky;top:0;background:#111;z-index:3}.adminTop h2{margin:0;font-size:20px}.adminActions{display:flex;gap:8px;flex-wrap:wrap}.adminBtn{border:1px solid #444;background:#202020;color:#fff;border-radius:9px;padding:10px 13px;cursor:pointer;font-weight:700}.adminBtn.primary{background:#ff4545;border-color:#ff4545;color:#fff}.adminTabs{display:flex;gap:8px;overflow:auto;padding:14px 16px;border-bottom:1px solid #333;background:#0d0d0f}.adminTab{white-space:nowrap}.adminTab.active{border-color:#ff4545;background:linear-gradient(135deg,#4b171c,#241013);box-shadow:inset 0 0 0 1px #ff454522}.adminContent{padding:22px;display:grid;gap:18px}.adminSection h3{font-size:21px;padding-bottom:12px;border-bottom:1px solid #303034}.adminItem{background:linear-gradient(145deg,#171719,#101012);border-color:#333338}.adminField input:focus,.adminField textarea:focus,.adminField select:focus{outline:1px solid #ff4545;border-color:#ff4545}.adminBtn{transition:background .15s,border-color .15s,transform .15s}.adminBtn:hover{border-color:#777;transform:translateY(-1px)}.adminSection{display:none}.adminSection.active{display:block}.adminSection h3{margin:0 0 14px}.adminGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.adminField{display:grid;gap:6px;min-width:0}.adminField.full{grid-column:1/-1}.adminField label{font-size:12px;color:#c6c6c6}.adminField input,.adminField textarea,.adminField select{width:100%;box-sizing:border-box;background:#090909;color:#fff;border:1px solid #3c3c3c;border-radius:8px;padding:11px;font:inherit;min-width:0}.adminField textarea{min-height:75px;resize:vertical}.adminHint{color:#aaa;font-size:12px;line-height:1.7}.adminList{display:grid;gap:12px}.adminItem{border:1px solid #363636;border-radius:12px;padding:14px;display:grid;gap:10px}.adminItemHead{display:flex;justify-content:space-between;align-items:center;gap:8px}.adminItemHead strong{overflow-wrap:anywhere}.adminItem img{width:100%;max-height:150px;object-fit:cover;border-radius:8px}.adminDanger{border-color:#8f3434;color:#ffb5b5}.adminToast{position:fixed;z-index:10002;right:18px;bottom:18px;background:#f4f4f4;color:#111;padding:12px 16px;border-radius:10px;display:none}.adminToast.show{display:block}.heroAdminImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.2;pointer-events:none;display:none}.hero{position:relative;overflow:hidden}.hero .wrap{position:relative;z-index:1}.clipManagedImage{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:12px;display:block}.clipArt{overflow:hidden}.adminLogin{position:fixed;inset:0;z-index:10001;background:#050507eF;backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px;direction:rtl;color:#fff}.adminLogin.open{display:flex}.adminLoginCard{width:min(100%,390px);background:linear-gradient(145deg,#1a1a1e,#0c0c0e);border:1px solid #45454b;border-radius:22px;padding:28px;box-shadow:0 25px 90px #000b;text-align:center}.adminLoginIcon{width:58px;height:58px;margin:0 auto 14px;border-radius:18px;background:#ff45451c;border:1px solid #ff454566;display:grid;place-items:center;font-size:27px}.adminLoginCard h2{margin:0 0 8px}.adminLoginCard p{color:#aaa;font-size:13px;line-height:1.8}.adminLoginCard input{width:100%;box-sizing:border-box;background:#09090b;color:#fff;border:1px solid #414149;border-radius:11px;padding:13px;font:inherit;margin:12px 0}.adminLoginCard .adminBtn{width:100%;padding:13px}.adminLoginError{min-height:20px;color:#ff8e8e;font-size:12px;margin-top:8px}
+@media(max-width:650px){.adminOverlay{padding:6px}.adminShell{margin:4px auto;border-radius:12px}.adminTop{padding:13px;align-items:flex-start}.adminTop h2{font-size:17px}.adminContent{padding:12px}.adminGrid{grid-template-columns:1fr}.adminField.full{grid-column:auto}.adminLaunch{left:50%;bottom:10px;padding:12px 18px;white-space:nowrap}.adminTabs{padding:10px}.introInner{padding:22px}}
+
+/* Refined dashboard inspired by a compact admin control center */
+.adminOverlay{background:rgba(5,7,10,.96);backdrop-filter:blur(14px);padding:12px}
+.adminShell{max-width:1050px;border-radius:20px;border:1px solid #34383e;background:linear-gradient(155deg,#12151b,#0b0d11 75%);box-shadow:0 28px 90px #000b}
+.adminTop{padding:20px 22px;background:linear-gradient(110deg,#171b22,#101216);border-bottom:1px solid #343840;gap:16px}
+.adminBrand{display:flex;align-items:center;gap:14px;min-width:0}.adminBrandMark{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#254f43,#172b28);border:1px solid #4d806b;color:#c2f3d7;font-weight:1000;font-size:25px;box-shadow:inset 0 0 22px #5ca88722}
+.adminTop h2{font-size:clamp(18px,3vw,25px);margin:2px 0 5px}.adminEyebrow{font-size:10px;letter-spacing:2px;color:#8fc8aa;font-weight:900}.adminHint{line-height:1.7}.adminBtn{border-radius:10px;border-color:#3a4048;background:#1b2027;padding:11px 14px}.adminBtn.primary{background:linear-gradient(135deg,#2e7258,#204a3b);border-color:#4b8a6e;color:#e4fff0}.adminContent{padding:20px;gap:18px}.adminWelcome{position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:15px;padding:24px;border:1px solid #69453e;border-radius:3px;background:linear-gradient(115deg,#201717,#15151a 72%);min-height:125px}.adminWelcome:after{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#b56d5b}.adminWelcome h3{font-size:clamp(22px,4vw,30px);margin:7px 0}.adminWelcome p{margin:0;color:#aaa;line-height:1.8;max-width:580px;font-size:14px}.adminWelcomeMark{font-size:clamp(27px,7vw,54px);font-weight:1000;letter-spacing:-3px;color:#ffffff08;white-space:nowrap}.adminStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0 25px}.adminStats>div{border:1px solid #30343b;background:#14171c;border-radius:12px;padding:14px;display:grid;gap:5px}.adminStats span{color:#9cd4b5;font-size:20px}.adminStats strong{font-size:13px}.adminStats small{color:#9298a1;font-size:11px;line-height:1.5}.adminSectionTitle{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:18px;margin:0 0 13px}.adminSectionTitle span{font-size:11px;color:#8f969f;font-weight:400}.adminDashboardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.adminDashCard{width:100%;min-width:0;display:flex;align-items:center;text-align:right;gap:12px;padding:16px;background:linear-gradient(135deg,#171a20,#111318);border:1px solid #343840;border-radius:13px;color:#f1f3f5;cursor:pointer;font:inherit;transition:transform .18s,border-color .18s,background .18s}.adminDashCard:hover{transform:translateY(-2px);border-color:#658d79;background:linear-gradient(135deg,#1b2421,#13161b)}.adminDashIcon{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:11px;background:#20342b;border:1px solid #365b48;color:#b7e8cb;font-weight:900;font-size:19px}.adminDashCard>span:nth-child(2){display:grid;gap:5px;min-width:0;flex:1}.adminDashCard strong{font-size:14px}.adminDashCard small{font-size:11px;line-height:1.6;color:#969ca5}.adminDashCard>b{color:#91c7a9;font-size:18px}.adminFootnote{margin-top:16px;padding:13px 15px;border-right:3px solid #4c8769;background:#121b17;color:#aebbb4;font-size:12px;line-height:1.8}.adminFootnote b{color:#c4efd5}.adminBack{margin-bottom:12px;color:#b6dfc7;border-color:#365c49}.adminSection h3{border-bottom-color:#343941}.adminItem{background:linear-gradient(145deg,#171a20,#101216);border-color:#333840}.adminField input,.adminField textarea,.adminField select{background:#0b0e12;border-color:#343a43;border-radius:10px;padding:12px}.adminField label{font-size:13px;color:#d0d4d8}.adminField input:focus,.adminField textarea:focus,.adminField select:focus{outline:1px solid #5e9b7b;border-color:#5e9b7b}.adminDanger{border-color:#77413e;color:#ffb6ad}.adminLaunch{position:relative;left:auto;bottom:auto;transform:none;z-index:2;margin:38px auto 24px;width:max-content;max-width:calc(100% - 32px);justify-content:center;background:linear-gradient(135deg,#e5252a,#790e15 75%,#111);border:1px solid #ff555a;color:#fff;box-shadow:0 8px 28px #b500002b,0 0 0 4px #e5252a12;border-radius:13px;padding:14px 24px;letter-spacing:0}.adminLaunch:hover{transform:translateY(-2px);box-shadow:0 12px 30px #b5000038,0 0 0 6px #e5252a1a}
+@media(max-width:650px){.adminOverlay{padding:5px}.adminShell{margin:3px auto;border-radius:13px}.adminTop{padding:13px;flex-direction:column;align-items:stretch}.adminBrandMark{width:40px;height:40px;flex-basis:40px}.adminActions{display:grid;grid-template-columns:1fr 1fr}.adminContent{padding:11px}.adminWelcome{padding:18px 15px;min-height:unset}.adminWelcomeMark{display:none}.adminStats{gap:7px}.adminStats>div{padding:10px 8px}.adminStats strong{font-size:11px}.adminStats small{font-size:10px}.adminDashboardGrid{grid-template-columns:1fr}.adminDashCard{padding:13px}.adminSectionTitle{font-size:16px}.adminLaunch{bottom:auto;padding:12px 19px;margin:30px auto 20px}}
+
+/* Brand image follows the site image selected in the dashboard. */
+.brand .badgeicon{background-position:center;background-size:cover;background-repeat:no-repeat;overflow:hidden;}
+.brand .badgeicon.has-brand-image{color:transparent;text-shadow:none;border-radius:50%;border:1px solid #e5252a;box-shadow:0 0 0 3px #e5252a20;}
+.adminLaunch{display:flex;position:relative;left:auto;bottom:auto;transform:none;margin:36px auto 22px;}
+.adminLaunch:hover{transform:translateY(-2px)}
+:root[data-theme="day"] .adminLaunch{background:linear-gradient(135deg,#ed292f,#a20f18 75%,#222);border-color:#e5252a;color:#fff;box-shadow:0 8px 26px #e5252a24,0 0 0 4px #e5252a12}
+:root[data-theme="day"] .adminLaunch:hover{box-shadow:0 12px 30px #e5252a30,0 0 0 6px #e5252a18}
+.adminEyebrow{color:#ff777b}
+.adminBrandMark,.adminDashIcon{background:linear-gradient(145deg,#451417,#1a1012);border-color:#7c282d;color:#ffb5b8;box-shadow:inset 0 0 18px #e5252a16}
+.adminDashCard:hover{border-color:#a33b40;background:linear-gradient(135deg,#261315,#131216)}
+.adminStats span{color:#ff777b}
+.adminBack{color:#ffb5b8;border-color:#783136}
+.adminFootnote{border-right-color:#e5252a;background:#1b1012;color:#c9b6b7}
+.adminFootnote b{color:#ffb5b8}
+:root[data-theme="day"] .adminDashIcon{background:#3a1114;border-color:#84232a;color:#ffb5b8}
+:root[data-theme="day"] .adminBtn.primary{background:linear-gradient(135deg,#e5252a,#9d1118);border-color:#ef3439;color:#fff}
+@media(max-width:650px){.adminLaunch{margin:28px auto 18px;max-width:calc(100% - 28px)}}
+</style>
+
+
+<style id="ms3dh-header-icons-fix">
+/* Keep logo, navigation controls and hamburger aligned in one header strip */
+header .nav{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:clamp(5px,1vw,14px)!important;position:relative}
+header .brand{flex:0 0 auto!important;min-width:max-content!important}
+header .navright{display:flex!important;flex:0 0 auto!important;flex-wrap:nowrap!important;align-items:center!important;gap:5px!important;margin-inline-start:auto!important}
+header .navright .lang,header .navright .menuBtn{white-space:nowrap;min-height:34px;padding:7px 8px;font-size:10px}
+header .menuBtn{display:inline-flex!important;align-items:center;justify-content:center;line-height:1;font-size:19px!important;min-width:34px}
+header .navlinks{flex:1 1 auto!important;min-width:0!important;overflow:auto}
+.platformLinks{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(100px,1fr))!important;gap:14px!important}
+.platformLink{opacity:1!important;transform:none!important;visibility:visible!important;min-width:0}
+.platformLink svg{display:block!important;width:34px!important;height:34px!important;fill:#ff4545!important;color:#ff4545!important;opacity:1!important;visibility:visible!important}
+.platformLink svg path{fill:currentColor!important}
+.platformLetter{display:grid;place-items:center;width:36px;height:36px;border:1px solid #ff4545;border-radius:10px;color:#ff4545;font-weight:900;font-size:24px;line-height:1}
+@media(max-width:1050px){
+ header .nav{flex-wrap:nowrap!important}
+ header .navlinks{display:none!important;position:absolute;top:calc(100% + 1px);inset-inline:10px;z-index:30;flex-direction:column;gap:3px;padding:10px;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 32px #0008;max-height:70vh;overflow:auto}
+ header .navlinks.open{display:flex!important}
+ header .navlinks a{display:block;padding:10px 12px}
+}
+@media(max-width:600px){
+ header .nav{padding:9px 8px!important;gap:5px!important}
+ header .brand{gap:6px!important;min-width:0!important;flex:0 1 auto!important}
+ header .brand strong{font-size:11px!important;letter-spacing:.04em!important}
+ header .brand small{display:none!important}
+ header .badgeicon,header .brand .badgeicon.has-brand-image{width:32px!important;height:32px!important;flex:0 0 32px!important}
+ header .navright{gap:3px!important}
+ header .navright .lang,header .navright .menuBtn{min-height:31px;padding:6px 5px!important;font-size:9px!important}
+ header #searchToggle{font-size:15px!important;min-width:27px}
+ header #themeToggle{max-width:42px;overflow:hidden;text-overflow:clip}
+ header #supportNavBtn{padding-inline:5px!important}
+ header #lang{max-width:48px;overflow:hidden}
+ header .menuBtn{min-width:30px;font-size:17px!important}
+ .platformLinks{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+ .platformLink{min-height:90px!important;padding:9px 4px}
+ .platformLink svg{width:28px!important;height:28px!important}
+ .platformLink span{font-size:11px!important;overflow-wrap:anywhere;text-align:center}
+}
+</style>
+
+
+<style id="ms3dh-header-left-and-silent-save">
+/* Keep all header controls on the same strip and group them at the far left in Arabic layout */
+header .nav{display:flex!important;align-items:center!important;flex-wrap:nowrap!important}
+header .navright{order:0!important;margin-inline-start:auto!important;margin-inline-end:0!important;justify-content:flex-start!important;gap:4px!important;direction:ltr!important}
+header .brand{order:2!important}
+header .navlinks{order:1!important}
+header .navright .lang,header .navright .menuBtn{padding:6px 7px!important;min-height:32px!important;font-size:10px!important}
+.toast,.toast.show{display:none!important;opacity:0!important;visibility:hidden!important}
+@media(max-width:650px){header .nav{gap:4px!important}header .navright{gap:3px!important}header .navright .lang,header .navright .menuBtn{padding:5px 6px!important;font-size:9px!important;min-height:30px!important}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<div class="timeDateBar" aria-label="الوقت والتاريخ">
+  <div class="timeDateInner">
+    <span class="timeDateItem"><span class="clockDot"></span><span class="timeLabel" data-en="TIME" data-ar="الوقت">الوقت</span><strong id="liveClock">--:--:--</strong></span>
+    <span class="timeDateDivider" aria-hidden="true"></span>
+    <span class="timeDateItem"><span class="timeLabel" data-en="DATE" data-ar="التاريخ">التاريخ</span><strong id="liveDate">---</strong></span>
+  </div>
+</div>
+<header><nav class="nav">
+<a class="brand" href="#home"><span class="badgeicon">✦</span><span><strong data-en="MS3DH" data-ar="MS3DH">MS3DH</strong><small data-en="CONTENT · COMMUNITY · LIVE" data-ar="محتوى · مجتمع · بث مباشر">CONTENT · COMMUNITY · LIVE</small></span></a>
+<div class="navlinks" id="navlinks">
+<a href="#home" class="active" data-en="01 HOME" data-ar="01 الرئيسية">01 HOME</a>
+<a href="#about" data-en="02 ABOUT" data-ar="02 نبذة">02 ABOUT</a>
+<a href="#platforms" data-en="03 PLATFORMS" data-ar="03 المنصات">03 PLATFORMS</a>
+<a href="#clips" data-en="04 CLIPS & EVENTS" data-ar="04 المقاطع والفعاليات">04 CLIPS & EVENTS</a>
+<a href="#news" data-en="05 NEWS" data-ar="05 الأخبار">05 NEWS</a>
+<a href="#live" data-en="06 LIVE" data-ar="06 البث المباشر">06 LIVE</a>
+</div>
+<div class="navright">
+<button class="lang searchToggle" id="searchToggle" type="button" aria-label="Search" title="بحث">⌕</button><button class="lang" id="themeToggle" type="button" aria-label="Toggle day/night">☾ NIGHT</button><a class="lang supportNav" id="supportNavBtn" href="#support" data-en="Support" data-ar="الدعم">الدعم</a>
+
+<button class="lang" id="lang" type="button">العربية</button>
+<button class="menuBtn" id="menuBtn" type="button">☰</button>
+</div>
+</nav></header>
+<div class="ticker"><span><b>● <span data-en="CREATOR ONLINE" data-ar="صانع المحتوى حاضر">CREATOR ONLINE</span></b></span><span data-en="NEW CLIPS EVERY WEEK" data-ar="مقاطع جديدة كل أسبوع">NEW CLIPS EVERY WEEK</span><span data-en="JOIN THE COMMUNITY" data-ar="انضم للمجتمع">JOIN THE COMMUNITY</span><span data-en="STREAM · PLAY · REPEAT" data-ar="بث · لعب · أعد">STREAM · PLAY · REPEAT</span></div>
+<main id="homeMain">
+<section class="hero" id="home"><div class="wrap heroInner">
+<div class="heroMeta"><span class="dot">●</span> <span data-en="YOUR NEXT FAVORITE STREAMER" data-ar="ستريمرّك المفضل القادم">YOUR NEXT FAVORITE STREAMER</span> <span>—</span> <span data-en="WELCOME TO THE COMMUNITY" data-ar="حيّاك في المجتمع">WELCOME TO THE COMMUNITY</span></div>
+<h1 data-en="WELCOME TO <em>MS3DH.</em><br>YOUR SPACE." data-ar="حيّاكم في <em>MS3DH.</em><br>مكانكم هنا.">PLAY HARD.<br>STREAM <em>LOUD.</em></h1>
+<p data-en="Explore the latest updates, discover my platforms, and catch the latest clips and streams." data-ar="اكتشف آخر التحديثات وروابط المنصات، وتابع أحدث المقاطع والبثوث أولًا بأول.">Welcome to my corner of the internet. Catch the latest streams, best moments, upcoming events and everything happening in the community.</p>
+<div class="actions"><a class="btn" href="#live" data-en="▶ WATCH LIVE" data-ar="▶ شاهد البث">▶ WATCH LIVE</a><a class="btn secondary" href="#platforms" data-en="EXPLORE THE SITE ↘" data-ar="استكشف الموقع ↘">EXPLORE MY LINKS ↘</a></div>
+<div class="heroFoot"><span>CREATOR <strong data-en="MS3DH" data-ar="MS3DH">MS3DH</strong></span><span data-en="GAMING · ENTERTAINMENT · COMMUNITY" data-ar="ألعاب · ترفيه · مجتمع">GAMING · ENTERTAINMENT · COMMUNITY</span><span><strong data-en="WELCOME IN" data-ar="نورتونا">WELCOME IN</strong></span></div>
+</div>
+</section>
+<div class="wrap">
+<section class="section" id="about">
+<div class="sectionHead"><div><div class="eyebrow" data-en="01 / GET TO KNOW ME" data-ar="01 / تعرّف عليّ">01 / GET TO KNOW ME</div><h2 data-en="A little about <em>me.</em>" data-ar="نبذة <em>عني.</em>">A little about <em>me.</em></h2></div><p data-en="Gaming, good energy, and unforgettable moments — building a community where everyone belongs." data-ar="أشارككم شغفي بالألعاب واللحظات الحماسية، ونسوي مع بعض مجتمع يجمعنا على المتعة والتحديات والذكريات الحلوة.">Gaming, good energy, and unforgettable moments — building a community where everyone belongs.</p></div>
+<div class="stats">
+<div class="stat"><div class="statlabel" data-en="MAIN CONTENT" data-ar="المحتوى الأساسي">MAIN CONTENT</div><div class="statnum" data-en="Gaming" data-ar="ألعاب">Gaming</div><div class="statdesc" data-en="Gameplay, challenges & highlights" data-ar="تحديات، لقطات حماسية وأفضل اللحظات">Gameplay, challenges & highlights</div></div>
+<div class="stat"><div class="statlabel" data-en="THE VIBE" data-ar="الأجواء">THE VIBE</div><div class="statnum" data-en="Chill" data-ar="وناسة">Chill</div><div class="statdesc" data-en="Relaxed vibes and lots of laughs" data-ar="أجواء خفيفة ووناسة وضحك">Relaxed vibes and lots of laughs</div></div>
+<div class="stat"><div class="statlabel" data-en="COMMUNITY" data-ar="المجتمع">COMMUNITY</div><div class="statnum" data-en="One team" data-ar="فريق واحد">One team</div><div class="statdesc" data-en="A community that makes it special" data-ar="وجودكم هو اللي يميّز التجربة">A community that makes it special</div></div>
+<div class="stat"><div class="statlabel" data-en="STREAMS" data-ar="البثوث">STREAMS</div><div class="statnum" data-en="Live" data-ar="مباشر">Live</div><div class="statdesc" data-en="Catch the next live moment" data-ar="كونوا قريبين عشان ما يفوتكم البث القادم">Catch the next live moment</div></div>
+</div>
+</section>
+<section class="section" id="platforms">
+<div class="sectionHead"><div><div class="eyebrow" data-en="02 / FIND ME ONLINE" data-ar="02 / تابعني">02 / FIND ME ONLINE</div><h2 data-en="Platforms & <em>links.</em>" data-ar="منصاتي <em>وروابطي.</em>">Platforms & <em>links.</em></h2></div><p data-en="Choose a platform to visit my page." data-ar="اضغط على المنصة لزيارة حسابي.">Choose a platform to visit my page.</p></div>
+<div class="platformLinks">
+<a class="platformLink" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M19.6 6.2a6.8 6.8 0 0 1-4.1-4.1A7.7 7.7 0 0 1 15.2 0h-4.1v15.8a3.2 3.2 0 1 1-2.3-3.1V8.5a7.3 7.3 0 1 0 6.7 7.3V8.1a10.8 10.8 0 0 0 6.1 1.9V5.9a6.7 6.7 0 0 1-2-.3Z"/></svg><span>TikTok</span></a>
+<a class="platformLink" href="https://discord.com/" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.7 5.2A19.5 19.5 0 0 0 15 3.7l-.6 1.2a17.7 17.7 0 0 0-4.8 0L9 3.7a19.5 19.5 0 0 0-4.7 1.5C1.3 9.6.5 13.9.9 18.2a19.2 19.2 0 0 0 5.8 2.9l1.2-2a12.5 12.5 0 0 1-1.9-.9l.5-.4a13.8 13.8 0 0 0 11 0l.5.4a12.5 12.5 0 0 1-1.9.9l1.2 2a19.2 19.2 0 0 0 5.8-2.9c.5-5-.8-9.3-3.4-13ZM8.8 15.3c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.4 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg><span>Discord</span></a>
+<a class="platformLink" href="https://kick.com/" target="_blank" rel="noopener" aria-label="Kick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2h7v7l5-7h7l-7 9 7 11h-7l-5-8v8H3z"/></svg><span>Kick</span></a>
+<a class="platformLink" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.1-3.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg><span>Instagram</span></a>
+<a class="platformLink" href="https://x.com/" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.8 5.7 22H2.5l7.3-8.4L1.8 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20Z"/></svg><span>X</span></a>
+</div>
+</section>
+<section class="section" id="clips">
+<div class="sectionHead"><div><div class="eyebrow" data-en="03 / THE BEST BITS" data-ar="03 / أحلى اللحظات">03 / THE BEST BITS</div><h2 data-en="Clips & <em>events.</em>" data-ar="المقاطع <em>والفعاليات.</em>">Clips & <em>events.</em></h2></div><p data-en="The moments worth replaying, plus what is coming up next." data-ar="لحظات تستاهل الإعادة، والفعاليات اللي جاية بالطريق.">The moments worth replaying, plus what is coming up next.</p></div>
+<div class="grid3">
+<article class="card"><div class="cardtop"><span>CLIP / 001</span><span class="tag" data-en="HIGHLIGHT" data-ar="لقطة مميزة">HIGHLIGHT</span></div><div class="clipArt">▶</div><h3 data-en="The unexpected moment" data-ar="اللحظة غير المتوقعة">The unexpected moment</h3><p data-en="Add your best clip link here." data-ar="أضف رابط أفضل مقطع لك هنا.">Add your best clip link here.</p><a class="textLink" href="https://www.youtube.com/" target="_blank" rel="noopener" data-en="WATCH CLIP ↗" data-ar="شاهد المقطع ↗">WATCH CLIP ↗</a></article>
+<article class="card"><div class="cardtop"><span>EVENT / 002</span><span class="tag" data-en="UPCOMING" data-ar="قريبًا">UPCOMING</span></div><div class="clipArt">✦</div><h3 data-en="Community game night" data-ar="ليلة ألعاب مع المجتمع">Community game night</h3><p data-en="Add the next event date, time and details." data-ar="أضف تاريخ ووقت وتفاصيل الفعالية القادمة.">Add the next event date, time and details.</p><a class="textLink" href="#news" data-en="EVENT DETAILS ↗" data-ar="تفاصيل الفعالية ↗">EVENT DETAILS ↗</a></article>
+<article class="card"><div class="cardtop"><span>CLIP / 003</span><span class="tag" data-en="COMMUNITY PICK" data-ar="اختيار المجتمع">COMMUNITY PICK</span></div><div class="clipArt">◈</div><h3 data-en="Community's favorite" data-ar="المقطع المفضل للمجتمع">Community's favorite</h3><p data-en="Feature a viewer clip or a memorable stream moment." data-ar="اعرض مقطع متابع أو لحظة مميزة من أحد البثوث.">Feature a viewer clip or a memorable stream moment.</p><a class="textLink" href="https://www.tiktok.com/" target="_blank" rel="noopener" data-en="SEE MORE ↗" data-ar="شاهد المزيد ↗">SEE MORE ↗</a></article>
+</div>
+</section>
+<section class="section" id="news">
+<div class="sectionHead"><div><div class="eyebrow" data-en="04 / WHAT'S NEW" data-ar="04 / آخر المستجدات">04 / WHAT'S NEW</div><h2 data-en="News & <em>updates.</em>" data-ar="الأخبار <em>والتحديثات.</em>">News & <em>updates.</em></h2></div><p data-en="Announcements, schedule changes and important community updates." data-ar="الإعلانات، تغييرات الجدول وأهم أخبار المجتمع.">Announcements, schedule changes and important community updates.</p></div>
+<div class="newsList">
+<article class="newsItem"><span class="newsDate">UPDATE / 01</span><div><h3 data-en="Welcome to the new streamer hub" data-ar="أهلًا بكم في موقع الستريمر الجديد">Welcome to the new streamer hub</h3><p data-en="This is where new announcements and channel updates will appear." data-ar="هنا راح تنزل الإعلانات الجديدة وتحديثات القناة.">This is where new announcements and channel updates will appear.</p></div><span class="tag" data-en="LATEST" data-ar="الأحدث">LATEST</span></article>
+<article class="newsItem"><span class="newsDate">SCHEDULE / 02</span><div><h3 data-en="Stream schedule coming soon" data-ar="جدول البث قريبًا">Stream schedule coming soon</h3><p data-en="Follow the platforms above so you don't miss the next live session." data-ar="تابع المنصات فوق عشان ما يفوتك موعد البث القادم.">Follow the platforms above so you don't miss the next live session.</p></div><span class="tag" data-en="SOON" data-ar="قريبًا">SOON</span></article>
+<article class="newsItem"><span class="newsDate">COMMUNITY / 03</span><div><h3 data-en="More community events on the way" data-ar="فعاليات أكثر بالطريق">More community events on the way</h3><p data-en="Watch this section for giveaways, game nights and special streams." data-ar="تابع هذا القسم للسحوبات وليالي الألعاب والبثوث الخاصة.">Watch this section for giveaways, game nights and special streams.</p></div><span class="tag" data-en="NEWS" data-ar="خبر">NEWS</span></article>
+</div>
+</section>
+<section class="section" id="live">
+<div class="sectionHead"><div><div class="eyebrow" data-en="05 / TUNE IN" data-ar="05 / تابع البث">05 / TUNE IN</div><h2 data-en="Live <em>stream.</em>" data-ar="البث <em>المباشر.</em>">Live <em>stream.</em></h2></div><p data-en="Catch the action live. Add your channel link below to send viewers straight to your stream." data-ar="تابع اللعب مباشرة. ضع رابط قناتك لإرسال المشاهدين إلى البث مباشرة.">Catch the action live. Add your channel link below to send viewers straight to your stream.</p></div>
+<div class="livePanel"><div class="liveScreen" id="kickPlayerArea"><img class="offlineStreamImage" id="offlineStreamImage" alt="صورة القناة عند عدم البث"><div class="liveOverlay" id="kickPlayerOverlay"><div class="playCircle">▶</div><span>MS3DH / KICK STREAM</span></div></div><div class="liveInfo"><div class="eyebrow" id="kickStatusLabel"><span class="dot">●</span> <span data-en="CHECKING STREAM" data-ar="جارٍ التحقق من البث">جارٍ التحقق من البث</span></div><h3 id="kickStatusTitle">جارٍ التحقق من قناة Kick…</h3><p id="kickStatusDescription">تتحدث حالة البث تلقائيًا.</p><a class="btn" id="kickWatchButton" href="https://kick.com/" target="_blank" rel="noopener">افتح قناة Kick ↗</a></div></div>
+</section>
+<section class="section" id="support">
+<div class="sectionHead"><div><div class="eyebrow" data-en="06 / CONTACT & SUPPORT" data-ar="06 / التواصل والدعم">06 / CONTACT & SUPPORT</div><h2 data-en="Contact <em>Me.</em>" data-ar="للتواصل <em>معي.</em>">دعمكم يعني <em>لي الكثير.</em></h2></div><p data-en="Thank you for being part of the MS3DH community. Tap this card to send an inquiry, complaint or suggestion." data-ar="شكرًا لكونكم جزءًا من مجتمع MS3DH. اضغط على هذه المساحة لفتح نموذج الاستفسارات والشكاوى والاقتراحات.">شكرًا لكونكم جزءًا من مجتمع MS3DH. اضغط على هذه المساحة لفتح نموذج الاستفسارات والشكاوى والاقتراحات.</p></div>
+<a class="supportLanding supportLandingLink" href="#support-page" aria-label="فتح نموذج الدعم">
+<div class="supportLandingIcon">✉</div>
+<div><h3 data-en="MS3DH Support Center" data-ar="مركز دعم MS3DH">مركز دعم MS3DH</h3><p data-en="Inquiry · Complaint · Suggestion — tap anywhere here to continue." data-ar="استفسار · شكوى · اقتراح — اضغط على هذه المساحة للمتابعة.">استفسار · شكوى · اقتراح — اضغط على هذه المساحة للمتابعة.</p></div>
+<span class="supportCardArrow" aria-hidden="true">↗</span>
+</a></section>
+<footer class="footer"><span><strong data-en="MS3DH" data-ar="MS3DH">MS3DH</strong> / <span data-en="OFFICIAL WEBSITE" data-ar="الموقع الرسمي">OFFICIAL WEBSITE</span></span><span data-en="MADE FOR THE COMMUNITY · " data-ar="صنع للمجتمع · ">MADE FOR THE COMMUNITY · </span><span id="clock">00:00:00</span></footer>
+</div>
+</main>
+
+<main id="supportMain" hidden>
+ <div class="supportPageWrap">
+  <div class="supportPageHead">
+   <div class="eyebrow">MS3DH / SUPPORT CENTER</div>
+   <h1>مركز <em>الدعم</em></h1>
+   <p>اختر نوع الطلب واكتب معلومات ديسكورد والتفاصيل. هذه صفحة داخل الموقع نفسه، ويمكنك الرجوع للرئيسية بدون فتح موقع أو ملف خارجي.</p>
+  </div>
+  <div class="supportPageGrid">
+   <form class="supportForm" id="supportForm">
+    <div class="formIntro"><span class="formIcon">✉</span><div><strong>إرسال طلب جديد</strong><small>استفسار · شكوى · اقتراح</small></div></div>
+    <label for="discordName">اسمك في ديسكورد *</label>
+    <input id="discordName" name="discordName" placeholder="مثال: username" required maxlength="80">
+    <label for="discordId">معرّف ديسكورد (اختياري)</label>
+    <input id="discordId" name="discordId" placeholder="مثال: 123456789012345678" maxlength="30" inputmode="numeric">
+    <label for="requestType">نوع الطلب *</label>
+    <select id="requestType" name="requestType" required><option>استفسار</option><option>شكوى</option><option>اقتراح</option></select>
+    <label for="requestTitle">عنوان الطلب *</label>
+    <input id="requestTitle" name="requestTitle" placeholder="اكتب عنوانًا مختصرًا" required maxlength="120">
+    <label for="requestMessage">تفاصيل الطلب *</label>
+    <textarea id="requestMessage" name="requestMessage" placeholder="اكتب تفاصيل الطلب..." required maxlength="1800"></textarea>
+    <button class="btn" type="submit">إرسال الطلب ↗</button>
+    <p class="supportNotice">ملاحظة: إرسال الطلب إلى ديسكورد يحتاج ربطًا آمنًا بخادم أو Firebase Functions.</p>
+    <div class="supportNotice" id="supportStatus" role="status"></div>
+   </form>
+   <aside class="supportSide">
+    <div class="eyebrow">HOW CAN WE HELP?</div><h2>طلبك <em>يهمّنا.</em></h2>
+    <p>اختر التصنيف الصحيح واكتب التفاصيل بوضوح. لا تكتب كلمة مرورك أو أي معلومات سرية.</p>
+    <div class="supportTypes"><span>01 · استفسار</span><span>02 · شكوى</span><span>03 · اقتراح</span></div>
+    <button type="button" class="btn secondary" id="backHome">← الرجوع إلى الرئيسية</button>
+   </aside>
+  </div>
+ </div>
+</main>
+
+<div class="searchPanel" id="searchPanel" hidden><form id="searchForm"><span>⌕</span><input id="siteSearch" type="search" placeholder="ابحث في الموقع..." aria-label="ابحث في الموقع"><button class="lang" type="submit">بحث ↵</button><button class="lang" type="button" id="closeSearch" aria-label="إغلاق البحث">✕</button></form><div id="searchResults" class="searchResults"></div></div><div class="toast" id="toast">Link copied</div>
+<script>
+let currentLang="ar",currentTheme="night";
+function applyLanguage(lang){
+ currentLang=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-en][data-ar]").forEach(el=>{const val=el.dataset[lang];if(val!==undefined)el.innerHTML=val;});
+ document.getElementById("lang").textContent=lang==="en"?"العربية":"English";const sb=document.getElementById("supportNavBtn");if(sb)sb.textContent=lang==="ar"?"الدعم":"Support";
+ document.getElementById("themeToggle").textContent=currentTheme==="night"?(lang==="ar"?"☾ الوضع الليلي":"☾ NIGHT"):(lang==="ar"?"☀ الوضع النهاري":"☀ DAY");
+ document.querySelectorAll(".navlinks a").forEach(a=>a.classList.toggle("active",location.hash===a.getAttribute("href")));
+}
+function applyTheme(mode){
+ currentTheme=mode;document.documentElement.setAttribute("data-theme",mode);document.body.setAttribute("data-theme",mode);
+ const b=document.getElementById("themeToggle");b.textContent=mode==="night"?(currentLang==="ar"?"☾ الوضع الليلي":"☾ NIGHT"):(currentLang==="ar"?"☀ الوضع النهاري":"☀ DAY");
+ b.setAttribute("aria-pressed",mode==="day"?"true":"false");
+}
+document.getElementById("lang").addEventListener("click",()=>applyLanguage(currentLang==="en"?"ar":"en"));
+document.getElementById("themeToggle").addEventListener("click",()=>applyTheme(currentTheme==="night"?"day":"night"));
+document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("navlinks").classList.toggle("open"));
+document.querySelectorAll(".navlinks a").forEach(a=>a.addEventListener("click",()=>{document.getElementById("navlinks").classList.remove("open");document.querySelectorAll(".navlinks a").forEach(x=>x.classList.toggle("active",x===a));}));
+document.getElementById("shareBtn")?.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(location.href);notify(currentLang==="ar"?"تم نسخ رابط الصفحة":"Page link copied");}catch(e){notify(currentLang==="ar"?"انسخ رابط الموقع من شريط العنوان":"Copy the site URL from your address bar");}});
+function notify(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400)}
+function tick(){const d=new Date();document.getElementById("clock").textContent=d.toLocaleTimeString(currentLang==="ar"?"ar":"en",{hour12:false});}setInterval(tick,1000);tick();
+applyTheme("night");applyLanguage("ar");
+</script>
+<script>
+
+// Live local clock/date in the top bar
+(function(){
+  const clock=document.getElementById('liveClock');
+  const date=document.getElementById('liveDate');
+  if(!clock||!date)return;
+  function tick(){
+    const now=new Date();
+    const isArabic=document.documentElement.lang==='ar'||document.documentElement.dir==='rtl';
+    const locale=isArabic?'ar-QA':'en-GB';
+    clock.textContent=new Intl.DateTimeFormat(locale,{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
+    date.textContent=new Intl.DateTimeFormat(locale,{day:'2-digit',month:'short',year:'numeric'}).format(now);
+  }
+  tick();setInterval(tick,1000);
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
+    }),{threshold:.12});
+    document.querySelectorAll('.section,.sectionHead,.platformLink').forEach(el=>observer.observe(el));
+  }
+})();
+
+</script>
+
+<script>
+(function(){
+ const panel=document.getElementById('searchPanel'),toggle=document.getElementById('searchToggle'),close=document.getElementById('closeSearch'),input=document.getElementById('siteSearch'),results=document.getElementById('searchResults');
+ if(!panel||!toggle||!close||!input||!results)return;
+ toggle.addEventListener('click',()=>{panel.hidden=!panel.hidden;if(!panel.hidden)input.focus()});
+ close.addEventListener('click',()=>panel.hidden=true);
+ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();panel.hidden=false;input.focus()}if(e.key==='Escape')panel.hidden=true});
+ document.getElementById('searchForm')?.addEventListener('submit',e=>{
+  e.preventDefault();const q=input.value.trim().toLocaleLowerCase();results.innerHTML='';
+  if(!q){results.innerHTML='<p>اكتب كلمة للبحث.</p>';return;}
+  const matches=[...document.querySelectorAll('main section[id]')].filter(sec=>sec.innerText.toLocaleLowerCase().includes(q));
+  if(!matches.length){results.innerHTML='<p>ما لقينا نتائج مطابقة.</p>';return;}
+  matches.forEach(sec=>{const a=document.createElement('a');a.href='#'+sec.id;a.textContent=(sec.querySelector('h2')?.innerText||sec.id).replace(/\s+/g,' ').trim();a.addEventListener('click',()=>panel.hidden=true);results.appendChild(a);});
+ });
+})();
+</script>
+
+
+<script>
+(function(){
+ const home=document.getElementById('homeMain'),support=document.getElementById('supportMain');
+ function showSupport(show){
+  home.hidden=show;support.hidden=!show;
+  document.querySelector('.ticker').style.display=show?'none':'flex';
+  document.querySelector('.footer').style.display=show?'none':'flex';
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(show) history.replaceState(null,'','#support-page'); else history.replaceState(null,'','#home');
+  document.getElementById('navlinks').classList.remove('open');
+ }
+ document.querySelectorAll('a[href="#support-page"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showSupport(true)}));
+ document.getElementById('backHome')?.addEventListener('click',()=>showSupport(false));
+ document.querySelectorAll('.brand,a[href="#home"]').forEach(a=>a.addEventListener('click',e=>{if(!support.hidden){e.preventDefault();showSupport(false)}}));
+ if(location.hash==='#support-page')showSupport(true);
+ document.getElementById('supportForm')?.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const form=e.currentTarget, status=document.getElementById('supportStatus'), submit=form.querySelector('button[type=submit]');
+  status.textContent='جارٍ إرسال طلبك…'; if(submit)submit.disabled=true;
+  const payload={discordName:form.discordName.value.trim(),discordId:form.discordId.value.trim(),requestType:form.requestType.value,requestTitle:form.requestTitle.value.trim(),requestMessage:form.requestMessage.value.trim()};
+  try{const res=await fetch('/.netlify/functions/support',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await res.json().catch(()=>({}));if(!res.ok||!data.success)throw new Error(data.error||'تعذر الإرسال');status.textContent='تم إرسال طلبك بنجاح إلى فريق الدعم في ديسكورد.';form.reset();}
+  catch(err){status.textContent='لم يتم إرسال الطلب. تأكد من إعداد DISCORD_SUPPORT_WEBHOOK_URL في Netlify ثم جرّب مجددًا.';}
+  finally{if(submit)submit.disabled=false;}
+ });
+})();
+</script>
+
+
+<!-- Admin dashboard and editable entry screen -->
+<button class="adminLaunch" id="adminLaunch" type="button"><span>⚙</span> إدارة الموقع</button>
+<div class="adminLogin" id="adminLogin" role="dialog" aria-modal="true" aria-label="تسجيل دخول إدارة الموقع"><div class="adminLoginCard"><div class="adminLoginIcon">🔐</div><h2>إدارة MS3DH</h2><p>أدخل مفتاح إدارة الموقع الذي أعددته في Netlify لفتح لوحة التحكم.</p><form id="adminLoginForm"><input id="adminPassword" type="password" autocomplete="current-password" placeholder="مفتاح إدارة الموقع من Netlify" required><button class="adminBtn primary" type="submit">دخول لوحة التحكم ↗</button></form><div class="adminLoginError" id="adminLoginError" role="status"></div><button class="adminBtn" id="adminLoginCancel" type="button" style="margin-top:8px">إلغاء</button></div></div>
+<div class="adminOverlay" id="adminOverlay" aria-modal="true" role="dialog" aria-label="لوحة التحكم">
+ <div class="adminShell">
+  <div class="adminTop"><div class="adminBrand"><div class="adminBrandMark">M</div><div><div class="adminEyebrow">MS3DH / ADMIN CONTROL</div><h2>مركز إدارة الموقع</h2><div class="adminHint">كل أدوات موقعك في مكان واحد · الحفظ مشترك لجميع الزوار</div></div></div><div class="adminActions"><button class="adminBtn primary" id="adminSave">✓ حفظ التغييرات</button><button class="adminBtn" id="adminClose">إغلاق ✕</button></div></div>
+  <div class="adminContent">
+   <section class="adminSection active" data-section="overview">
+    <div class="adminWelcome"><div><div class="adminEyebrow">CONTROL CENTER</div><h3>أهلًا بك في إدارة MS3DH</h3><p>اختر القسم الذي تريد تعديله، وعدّل محتوى موقعك بسهولة من لوحة واحدة.</p></div><div class="adminWelcomeMark">MS3DH</div></div>
+    <div class="adminStats"><div><span>✦</span><strong>إدارة سهلة</strong><small>تحكم بمحتواك</small></div><div><span>◉</span><strong>تحديث مباشر</strong><small>شاهد التعديلات بالموقع</small></div><div><span>⌁</span><strong>حفظ محلي</strong><small>على نفس المتصفح</small></div></div>
+    <h3 class="adminSectionTitle">أقسام الموقع <span>اختر للبدء</span></h3>
+    <div class="adminDashboardGrid">
+     <button class="adminDashCard adminTab" data-tab="general"><span class="adminDashIcon">⚙</span><span><strong>هوية الموقع</strong><small>الصورة الرئيسية والمظهر</small></span><b>←</b></button>
+     <button class="adminDashCard adminTab" data-tab="clips"><span class="adminDashIcon">▶</span><span><strong>المقاطع والفعاليات</strong><small>الصور والوصف وروابط الانتقال</small></span><b>←</b></button>
+     <button class="adminDashCard adminTab" data-tab="news"><span class="adminDashIcon">▤</span><span><strong>الأخبار والتحديثات</strong><small>إضافة الأخبار وتعديلها وحذفها</small></span><b>←</b></button>
+     <button class="adminDashCard adminTab" data-tab="platforms"><span class="adminDashIcon">◎</span><span><strong>روابط المنصات</strong><small>إدارة حسابات التواصل</small></span><b>←</b></button>
+     <button class="adminDashCard adminTab" data-tab="texts"><span class="adminDashIcon">Aa</span><span><strong>النصوص واللغات</strong><small>تعديل النصوص العربية والإنجليزية</small></span><b>←</b></button>
+    </div>
+    <div class="adminFootnote">نصيحة: بعد الانتهاء من التعديلات اضغط <b>حفظ التغييرات</b> بالأعلى.</div>
+   </section>
+   <section class="adminSection" data-section="general"><button class="adminBtn adminBack" data-tab="overview">← كل الأقسام</button><h3>إعدادات الموقع</h3><p class="adminHint">تحكم بصورة الواجهة وباقي المحتوى من الأقسام التالية. التغييرات تحفظ في قاعدة البيانات المشتركة وتظهر لجميع الزوار بعد الحفظ.</p><div class="adminGrid">
+    <div class="adminField full"><label>اسم قناة Kick أو رابطها</label><input id="streamUrlAdmin" type="text" placeholder="مثال: ms3dh أو https://kick.com/ms3dh"><div class="adminHint">اكتب اسم القناة فقط أو رابطها. الموقع يتحقق تلقائيًا كل دقيقة ويعرض المشغل إذا كانت مباشرة.</div></div><div class="adminField full"><label>صورة تظهر إذا كانت القناة غير مباشرة</label><input id="offlineImageFile" type="file" accept="image/*"><input id="offlineImageUrl" type="url" placeholder="أو ضع رابط صورة https://..."><div class="adminHint">اختر صورة من جهازك أو ضع رابطًا. تُحفظ الصورة المرفوعة في إعدادات هذا المتصفح.</div><img id="offlineImagePreview" alt="معاينة صورة عدم البث" style="display:none;max-width:100%;max-height:180px;object-fit:cover;border-radius:10px"></div><div class="adminField full"><label>رابط الدعم (يُستخدم بالعربي والإنجليزي)</label><input id="supportUrlAdmin" type="url" placeholder="https://discord.gg/... أو رابط الدعم"><div class="adminHint">زر الدعم بجانب الوضع الليلي/النهاري يتغير مع لغة الموقع ويفتح هذا الرابط.</div></div><div class="adminField full"><label>صورة الموقع الرئيسية (ارفع صورة أو ضع رابط صورة)</label><input id="siteImageFile" type="file" accept="image/*"><input id="siteImageUrl" type="url" placeholder="https://example.com/image.jpg"><div class="adminHint">الصورة تظهر بخلفية القسم الرئيسي. رفع الصور الكبيرة جدًا قد يستهلك مساحة المتصفح.</div><img id="siteImagePreview" alt="معاينة صورة الموقع" style="display:none;max-width:100%;max-height:180px;object-fit:cover;border-radius:10px"></div>
+   </div></section>
+   <section class="adminSection" data-section="clips"><button class="adminBtn adminBack" data-tab="overview">← كل الأقسام</button><h3>إدارة المقاطع والفعاليات</h3><div class="adminGrid"><div class="adminField"><label>عنوان المقطع / الفعالية</label><input id="clipTitle" placeholder="عنوان المقطع"></div><div class="adminField"><label>وصف مختصر</label><input id="clipDesc" placeholder="وصف المقطع"></div><div class="adminField"><label>رابط الانتقال عند الضغط</label><input id="clipLink" type="url" placeholder="https://..."></div><div class="adminField"><label>رابط صورة أو ارفع صورة</label><input id="clipImageUrl" type="url" placeholder="https://..."><input id="clipImageFile" type="file" accept="image/*"></div><div class="adminField"><label>نوع البطاقة</label><select id="clipType"><option>مقطع</option><option>فعالية</option></select></div></div><p><button class="adminBtn primary" id="addClip">＋ إضافة مقطع / فعالية</button></p><div class="adminList" id="clipsAdminList"></div></section>
+   <section class="adminSection" data-section="news"><button class="adminBtn adminBack" data-tab="overview">← كل الأقسام</button><h3>إضافة خبر أو تعديله</h3><div class="adminGrid"><div class="adminField"><label>عنوان الخبر</label><input id="newsTitle" placeholder="عنوان الخبر"></div><div class="adminField"><label>التاريخ / التصنيف</label><input id="newsDate" placeholder="خبر / 04"></div><div class="adminField full"><label>تفاصيل الخبر</label><textarea id="newsDesc" placeholder="اكتب تفاصيل الخبر"></textarea></div></div><p><button class="adminBtn primary" id="addNews">＋ إضافة خبر</button></p><div class="adminList" id="newsAdminList"></div></section>
+   <section class="adminSection" data-section="platforms"><button class="adminBtn adminBack" data-tab="overview">← كل الأقسام</button><h3>إدارة روابط المنصات</h3><div class="adminGrid"><div class="adminField"><label>اسم المنصة</label><input id="platformName" placeholder="مثال: Twitch"></div><div class="adminField"><label>رابط المنصة</label><input id="platformUrl" type="url" placeholder="https://..."></div></div><p><button class="adminBtn primary" id="addPlatform">＋ إضافة منصة</button></p><div class="adminList" id="platformAdminList"></div></section>
+   <section class="adminSection" data-section="texts"><button class="adminBtn adminBack" data-tab="overview">← كل الأقسام</button><h3>تعديل النصوص الموجودة بالموقع</h3><p class="adminHint">عدّل العربية والإنجليزية لكل نص، ثم اضغط «حفظ التغييرات». اترك النص كما هو إذا ما تبي تغيّره.</p><div id="textEditor" class="adminList"></div></section>
+  </div>
+ </div>
+</div><div class="adminToast" id="adminToast" role="status"></div>
+<script>
+(function(){
+ const $=id=>document.getElementById(id), KEY='ms3dh_admin_v1';
+ const safeParse=s=>{try{return JSON.parse(s)}catch(e){return null}};
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ let state={siteImage:'',streamUrl:'',streamStatus:'offline',offlineImage:'',supportUrl:'#support',clips:[],news:[],platforms:[],texts:[]};
+ const toast=msg=>{const t=$('adminToast');if(t){t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200)}};
+ const api='/.netlify/functions/site-content';
+ let adminKey=sessionStorage.getItem('ms3dh_admin_key')||'';
+ async function apiGet(){const r=await fetch(api,{cache:'no-store'});if(!r.ok)throw new Error('تعذر تحميل المحتوى المشترك');const d=await r.json();return d.content||null}
+ async function apiAuth(key){const r=await fetch(api,{method:'POST',headers:{'content-type':'application/json','x-admin-key':key},body:JSON.stringify({action:'auth'})});return r.ok}
+ async function apiSave(){const r=await fetch(api,{method:'POST',headers:{'content-type':'application/json','x-admin-key':adminKey},body:JSON.stringify({action:'save',content:state})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'فشل الحفظ المشترك');return d}
+ function loadInitial(){
+  const saved=safeParse(localStorage.getItem(KEY)||'null');
+  state.clips=[...document.querySelectorAll('#clips .grid3 .card')].map((el,i)=>({id:'c'+i,title:el.querySelector('h3')?.textContent.trim()||'مقطع جديد',desc:el.querySelector('p')?.textContent.trim()||'',link:el.querySelector('a.textLink')?.getAttribute('href')||'#news',image:el.querySelector('img')?.src||'',type:el.innerText.includes('EVENT')?'فعالية':'مقطع'}));
+  state.news=[...document.querySelectorAll('#news .newsItem')].map((el,i)=>({id:'n'+i,date:el.querySelector('.newsDate')?.textContent.trim()||'خبر',title:el.querySelector('h3')?.textContent.trim()||'',desc:el.querySelector('p')?.textContent.trim()||''}));
+  const defaults=[...document.querySelectorAll('#platforms .platformLink')].map((el,i)=>({id:'p'+i,name:el.querySelector('span')?.textContent.trim()||el.getAttribute('aria-label')||'منصة',url:el.getAttribute('href')||'#',svg:el.querySelector('svg')?.outerHTML||''}));
+  if(saved){state={...state,...saved};}
+  // Keep every built-in platform unless the user explicitly removes it in the manager.
+  // Merge saved URLs by platform name so old saved data cannot replace the whole list.
+  const savedPlatforms=Array.isArray(saved?.platforms)?saved.platforms:[];
+  const merged=defaults.filter(x=>!/(youtube|يوتيوب)/i.test(x.name)).map(d=>{
+    const found=savedPlatforms.find(x=>String(x.name||'').trim().toLowerCase()===d.name.toLowerCase());
+    return found?{...d,...found,name:d.name,svg:d.svg||found.svg||''}:d;
+  });
+  savedPlatforms.filter(x=>!defaults.some(d=>d.name.toLowerCase()===String(x.name||'').toLowerCase())&&!/(youtube|يوتيوب)/i.test(String(x.name||''))).forEach(x=>merged.push(x));
+  if(!merged.some(x=>/^kick$/i.test(String(x.name||''))))merged.push({id:'kick-default',name:'Kick',url:'https://kick.com/',svg:''});
+  state.platforms=merged;
+ }
+ function renderClips(){const host=document.querySelector('#clips .grid3');host.innerHTML=state.clips.map((x,i)=>`<article class="card"><div class="cardtop"><span>${esc(x.type==='فعالية'?'EVENT':'CLIP')} / ${String(i+1).padStart(3,'0')}</span><span class="tag">${esc(x.type)}</span></div>${x.image?`<img class="clipManagedImage" src="${esc(x.image)}" alt="${esc(x.title)}">`:`<div class="clipArt">▶</div>`}<h3>${esc(x.title)}</h3><p>${esc(x.desc)}</p><a class="textLink" href="${esc(x.link||'#')}" ${/^https?:/i.test(x.link||'')?'target="_blank" rel="noopener"':''}>${x.type==='فعالية'?'تفاصيل الفعالية ↗':'شاهد المقطع ↗'}</a></article>`).join('');$('clipsAdminList').innerHTML=state.clips.map((x,i)=>`<div class="adminItem">${x.image?`<img src="${esc(x.image)}" alt="">`:''}<div class="adminItemHead"><strong>${esc(x.title)}</strong><button class="adminBtn adminDanger" data-delete-clip="${i}">حذف</button></div><div class="adminHint">${esc(x.desc)} · ${esc(x.link)}</div><div class="adminActions"><button class="adminBtn" data-edit-clip="${i}">تعديل</button></div></div>`).join('')||'<p class="adminHint">ما فيه مقاطع مضافة.</p>'; }
+ function renderNews(){const host=document.querySelector('#news .newsList');host.innerHTML=state.news.map(x=>`<article class="newsItem"><span class="newsDate">${esc(x.date)}</span><div><h3>${esc(x.title)}</h3><p>${esc(x.desc)}</p></div><span class="tag">خبر</span></article>`).join('');$('newsAdminList').innerHTML=state.news.map((x,i)=>`<div class="adminItem"><div class="adminItemHead"><strong>${esc(x.title)}</strong><button class="adminBtn adminDanger" data-delete-news="${i}">حذف</button></div><div class="adminHint">${esc(x.date)} · ${esc(x.desc)}</div><div class="adminActions"><button class="adminBtn" data-edit-news="${i}">تعديل</button></div></div>`).join('')||'<p class="adminHint">ما فيه أخبار.</p>'; }
+ function platformIcon(name){const n=String(name||'').toLowerCase();const paths={
+  'tiktok':'<path d="M19.6 6.2a6.8 6.8 0 0 1-4.1-4.1A7.7 7.7 0 0 1 15.2 0h-4.1v15.8a3.2 3.2 0 1 1-2.3-3.1V8.5a7.3 7.3 0 1 0 6.7 7.3V8.1a10.8 10.8 0 0 0 6.1 1.9V5.9a6.7 6.7 0 0 1-2-.3Z"/>' ,
+  'kick':'<path d="M3 2h7v7l5-7h7l-7 9 7 11h-7l-5-8v8H3z"/>',
+  'discord':'<path d="M19.7 5.2A19.5 19.5 0 0 0 15 3.7l-.6 1.2a17.7 17.7 0 0 0-4.8 0L9 3.7a19.5 19.5 0 0 0-4.7 1.5C1.3 9.6.5 13.9.9 18.2a19.2 19.2 0 0 0 5.8 2.9l1.2-2a12.5 12.5 0 0 1-1.9-.9l.5-.4a13.8 13.8 0 0 0 11 0l.5.4a12.5 12.5 0 0 1-1.9.9l1.2 2a19.2 19.2 0 0 0 5.8-2.9c.5-5-.8-9.3-3.4-13ZM8.8 15.3c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.4 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/>',
+  'instagram':'<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.1-3.3a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/>',
+  'x':'<path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.8 5.7 22H2.5l7.3-8.4L1.8 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20Z"/>'};return paths[n]?`<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${paths[n]}</svg>`:''}
+ function renderPlatforms(){const host=document.querySelector('#platforms .platformLinks');host.innerHTML=state.platforms.map(x=>{const icon=platformIcon(x.name)||(x.svg&&String(x.svg).includes('<svg')?x.svg:'');return `<a class="platformLink" href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${esc(x.name)}">${icon||`<span class="platformLetter">${esc((x.name||'?').slice(0,1).toUpperCase())}</span>`}<span>${esc(x.name)}</span></a>`}).join('');$('platformAdminList').innerHTML=state.platforms.map((x,i)=>`<div class="adminItem"><div class="adminItemHead"><strong>${esc(x.name)}</strong><button class="adminBtn adminDanger" data-delete-platform="${i}">حذف</button></div><div class="adminHint">${esc(x.url)}</div><div class="adminActions"><button class="adminBtn" data-edit-platform="${i}">تعديل</button></div></div>`).join('')||'<p class="adminHint">ما فيه منصات.</p>'; }
+ function kickSlug(value){let v=String(value||'').trim().replace(/^https?:\/\/(www\.)?kick\.com\//i,'').split(/[/?#]/)[0].replace(/^@/,'');return /^[a-zA-Z0-9_]{1,50}$/.test(v)?v:''}
+ async function checkKickStatus(){
+  let slug=kickSlug(state.streamUrl);const area=$('kickPlayerArea'), image=$('offlineStreamImage'), overlay=$('kickPlayerOverlay'), label=$('kickStatusLabel'), title=$('kickStatusTitle'), desc=$('kickStatusDescription'), btn=$('kickWatchButton');
+  if(!slug){try{const cfg=await fetch('/.netlify/functions/kick-status',{cache:'no-store'});const cfgData=await cfg.json();if(cfg.ok&&cfgData.success){if(cfgData.channel){slug=cfgData.channel;state.streamUrl=slug;}if(!state.offlineImage&&cfgData.offlineImage)state.offlineImage=cfgData.offlineImage;}}catch(e){}}
+  if(!slug){state.streamStatus='offline';if(area)area.querySelector('iframe')?.remove();if(image){image.src=state.offlineImage||'';image.style.display=state.offlineImage?'block':'none'}if(overlay)overlay.hidden=false;if(label)label.innerHTML='<span class="dot">●</span> '+(currentLang==='ar'?'لم تُحدّد القناة':'CHANNEL NOT SET');if(title)title.textContent=currentLang==='ar'?'حدد قناة Kick من إدارة الموقع':'Set a Kick channel in Site Admin';if(desc)desc.textContent=currentLang==='ar'?'افتح إدارة الموقع ← هوية الموقع، ثم اكتب اسم قناة Kick.':'Open Site Admin → Site Identity and enter your Kick channel.';if(btn){btn.href='https://kick.com/';btn.textContent=currentLang==='ar'?'افتح Kick ↗':'OPEN KICK ↗'}return}
+  if(btn){btn.href='https://kick.com/'+slug;btn.target='_blank';btn.rel='noopener'}
+  try{const res=await fetch('/.netlify/functions/kick-status?channel='+encodeURIComponent(slug),{cache:'no-store'});const data=await res.json();if(!res.ok||!data.success)throw new Error('status unavailable');state.streamStatus=data.isLive?'live':'offline';if(!state.offlineImage&&data.offlineImage)state.offlineImage=data.offlineImage;
+   if(data.isLive){if(image)image.style.display='none';if(overlay)overlay.hidden=true;let frame=area.querySelector('iframe');if(!frame){frame=document.createElement('iframe');frame.title='Kick live stream';frame.allow='autoplay; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';area.appendChild(frame)}const src='https://player.kick.com/'+slug+'?autoplay=true&muted=true';if(frame.src!==src)frame.src=src;if(label)label.innerHTML='<span class="dot" style="color:#42e58a">●</span> '+(currentLang==='ar'?'مباشر الآن':'LIVE NOW');if(title)title.textContent=data.title|| (currentLang==='ar'?'مباشر الآن':'Live Now');if(desc)desc.textContent=(currentLang==='ar'?'القناة تبث الآن على Kick.':'This channel is live on Kick.')+(Number.isFinite(Number(data.viewers))?' · '+data.viewers+' '+(currentLang==='ar'?'مشاهد':'viewers'):'');if(btn)btn.textContent=currentLang==='ar'?'شاهد البث على Kick ↗':'WATCH ON KICK ↗';
+   }else{area.querySelector('iframe')?.remove();if(image){image.src=state.offlineImage||'';image.style.display=state.offlineImage?'block':'none'}if(overlay)overlay.hidden=false;if(label)label.innerHTML='<span class="dot">●</span> '+(currentLang==='ar'?'غير مباشر':'OFFLINE');if(title)title.textContent=currentLang==='ar'?'غير مباشر':'Offline';if(desc)desc.textContent=currentLang==='ar'?'لا يوجد بث الآن. ستظهر صورة القناة التي اخترتها حتى يبدأ البث.':'No stream right now. Your selected offline image will show until the channel goes live.';if(btn)btn.textContent=currentLang==='ar'?'افتح قناة Kick ↗':'OPEN KICK CHANNEL ↗'}
+  }catch(err){if(label)label.innerHTML='<span class="dot">●</span> '+(currentLang==='ar'?'تعذر التحقق':'STATUS UNAVAILABLE');if(title)title.textContent=currentLang==='ar'?'تعذر التحقق من حالة البث':'Could not check stream status';if(desc)desc.textContent=currentLang==='ar'?'تحقق من نشر وظيفة kick-status في Netlify.':'Check that the kick-status Netlify function is deployed.';if(image){image.src=state.offlineImage||'';image.style.display=state.offlineImage?'block':'none'}if(overlay)overlay.hidden=false;}
+ }
+ function applyLiveAndSupport(){
+  const support=document.getElementById('supportNavBtn');if(support){support.href=state.supportUrl||'#support';support.target=/^https?:/i.test(state.supportUrl||'')?'_blank':'_self';support.rel='noopener';}
+  const streamInput=document.getElementById('streamUrlAdmin'),supportInput=document.getElementById('supportUrlAdmin'),offlineUrl=$('offlineImageUrl'),offlinePreview=$('offlineImagePreview');if(streamInput&&document.activeElement!==streamInput)streamInput.value=state.streamUrl||'';if(supportInput&&document.activeElement!==supportInput)supportInput.value=state.supportUrl||'';if(offlineUrl&&document.activeElement!==offlineUrl)offlineUrl.value=state.offlineImage&&!state.offlineImage.startsWith('data:')?state.offlineImage:'';if(offlinePreview){offlinePreview.src=state.offlineImage||'';offlinePreview.style.display=state.offlineImage?'block':'none'}checkKickStatus();
+ }
+ function applySiteImage(){const hero=document.querySelector('.hero');let img=$('heroAdminImage');if(!img&&hero){img=document.createElement('img');img.id='heroAdminImage';img.className='heroAdminImage';img.alt='';hero.prepend(img)}if(img){img.src=state.siteImage||'';img.style.display=state.siteImage?'block':'none'}const brandIcon=document.querySelector('.brand .badgeicon');if(brandIcon){brandIcon.style.backgroundImage=state.siteImage?'url(\"'+state.siteImage.replace(/\"/g,'%22')+'\")':'';brandIcon.classList.toggle('has-brand-image',!!state.siteImage);brandIcon.textContent=state.siteImage?'':'✦';} $('siteImagePreview').src=state.siteImage||'';$('siteImagePreview').style.display=state.siteImage?'block':'none';applyLiveAndSupport();}
+
+ function stableTextElements(){
+  // Do not include cards managed by the clips/news renderers: those nodes are recreated,
+  // which used to shift numeric indexes and overwrite unrelated page copy on save.
+  return [...document.querySelectorAll('[data-en][data-ar]')].filter(el=>!el.closest('#clips .grid3, #news .newsList, #adminOverlay'));
+ }
+ function buildTextEditor(){
+  const els=stableTextElements();const previous=Array.isArray(state.texts)?state.texts:[];
+  els.forEach((el,i)=>{if(!el.dataset.ms3dhTextKey)el.dataset.ms3dhTextKey='static-'+i;});
+  state.texts=els.map(el=>{const key=el.dataset.ms3dhTextKey;const old=previous.find(x=>x.key===key);return {key,ar:old&&typeof old.ar==='string'?old.ar:el.dataset.ar,en:old&&typeof old.en==='string'?old.en:el.dataset.en,tag:el.tagName,preview:((old?.ar||el.dataset.ar||old?.en||el.dataset.en||'')+'').replace(/<[^>]*>/g,'').slice(0,55)}});
+  $('textEditor').innerHTML=state.texts.map(x=>`<div class="adminItem"><strong>${esc(x.preview||'نص')}</strong><div class="adminGrid"><div class="adminField"><label>العربية</label><textarea data-text-ar="${esc(x.key)}">${esc(x.ar)}</textarea></div><div class="adminField"><label>English</label><textarea data-text-en="${esc(x.key)}">${esc(x.en)}</textarea></div></div></div>`).join('');
+ }
+ async function save(){
+  // Update only the fields currently managed by the form; preserve all other page content.
+  const imageUrl=$('siteImageUrl').value.trim();if(imageUrl)state.siteImage=imageUrl;
+  state.streamUrl=$('streamUrlAdmin').value.trim();
+  const offlineUrl=$('offlineImageUrl').value.trim();if(offlineUrl)state.offlineImage=offlineUrl;
+  const supportUrl=$('supportUrlAdmin').value.trim();if(supportUrl)state.supportUrl=supportUrl;
+  document.querySelectorAll('[data-text-ar]').forEach(el=>{const key=el.dataset.textAr;const item=state.texts.find(x=>x.key===key);if(item)item.ar=el.value;});
+  document.querySelectorAll('[data-text-en]').forEach(el=>{const key=el.dataset.textEn;const item=state.texts.find(x=>x.key===key);if(item)item.en=el.value;});
+  const textMap=new Map(stableTextElements().map(el=>[el.dataset.ms3dhTextKey,el]));
+  state.texts.forEach(x=>{const el=textMap.get(x.key);if(el){el.dataset.ar=x.ar;el.dataset.en=x.en;}});
+  // Ensure the fixed platform set remains intact and only strip the obsolete YouTube entry.
+  state.platforms=(state.platforms||[]).filter(x=>!/(youtube|يوتيوب)/i.test(String(x.name||'')));
+  if(!state.platforms.some(x=>/^tiktok$/i.test(String(x.name||''))))state.platforms.unshift({id:'tiktok-default',name:'TikTok',url:'https://www.tiktok.com/',svg:''});
+  if(!state.platforms.some(x=>/^kick$/i.test(String(x.name||''))))state.platforms.push({id:'kick-default',name:'Kick',url:'https://kick.com/',svg:''});
+  try{await apiSave();localStorage.setItem(KEY,JSON.stringify(state));}catch(e){toast('لم يتم الحفظ للجميع: '+(e.message||'تحقق من إعداد Supabase ومفتاح الإدارة'));return;}
+  renderPlatforms();renderClips();renderNews();applySiteImage();applyLanguage(currentLang);try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}toast('تم حفظ التعديلات للجميع بنجاح');
+ }
+
+ function refresh(){renderClips();renderNews();renderPlatforms();applySiteImage();applyLiveAndSupport();buildTextEditor();}
+ loadInitial();
+ // Restore shared site content from Supabase; local storage is only a temporary fallback.
+ apiGet().then(remote=>{if(remote&&typeof remote==='object'){state={...state,...remote};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){};const els=stableTextElements();els.forEach((el,i)=>{if(!el.dataset.ms3dhTextKey)el.dataset.ms3dhTextKey='static-'+i;});(state.texts||[]).forEach(x=>{const el=els.find(node=>node.dataset.ms3dhTextKey===x.key);if(el){el.dataset.ar=x.ar;el.dataset.en=x.en}});$('siteImageUrl').value=state.siteImage&&!state.siteImage.startsWith('data:')?state.siteImage:'';refresh();}}).catch(()=>{});
+ // Restore only keyed text edits. Old index-based data is intentionally ignored because
+ // indexes became invalid when dynamic cards were added or removed.
+ if(state.texts?.length){const els=stableTextElements();els.forEach((el,i)=>{if(!el.dataset.ms3dhTextKey)el.dataset.ms3dhTextKey='static-'+i;});state.texts.forEach(x=>{if(!x.key)return;const el=els.find(node=>node.dataset.ms3dhTextKey===x.key);if(el){el.dataset.ar=x.ar;el.dataset.en=x.en;}})}
+ applyLiveAndSupport();
+
+ $('adminLaunch').addEventListener('click',()=>{if(sessionStorage.getItem('ms3dh_admin_unlocked')==='1'){openAdmin()}else{$('adminLogin').classList.add('open');$('adminPassword').value='';$('adminLoginError').textContent='';setTimeout(()=>$('adminPassword').focus(),60)}});
+ function openAdmin(){$('adminLogin').classList.remove('open');$('adminOverlay').classList.add('open');document.body.style.overflow='hidden'}
+ $('adminLoginForm').addEventListener('submit',async e=>{e.preventDefault();const key=$('adminPassword').value.trim();$('adminLoginError').textContent='جارٍ التحقق…';try{if(await apiAuth(key)){adminKey=key;sessionStorage.setItem('ms3dh_admin_key',key);sessionStorage.setItem('ms3dh_admin_unlocked','1');openAdmin()}else{$('adminLoginError').textContent='المفتاح غير صحيح أو إعدادات Netlify غير مكتملة.';$('adminPassword').select()}}catch(err){$('adminLoginError').textContent='تعذر الاتصال. تأكد من نشر وظائف Netlify وإعداد المتغيرات.'}});
+ $('adminLoginCancel').addEventListener('click',()=>$('adminLogin').classList.remove('open'));
+ $('adminClose').addEventListener('click',()=>{$('adminOverlay').classList.remove('open');document.body.style.overflow='';sessionStorage.removeItem('ms3dh_admin_unlocked');sessionStorage.removeItem('ms3dh_admin_key');adminKey='';});$('adminSave').addEventListener('click',save);$('offlineImageUrl').addEventListener('input',()=>{state.offlineImage=$('offlineImageUrl').value.trim();applyLiveAndSupport()});$('offlineImageFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;if(f.size>1800000){toast('اختر صورة أقل من 1.8MB');e.target.value='';return}const r=new FileReader();r.onload=()=>{state.offlineImage=r.result;$('offlineImageUrl').value='';applyLiveAndSupport()};r.readAsDataURL(f)});$('streamUrlAdmin').addEventListener('input',()=>{state.streamUrl=$('streamUrlAdmin').value.trim();applyLiveAndSupport()});$('supportUrlAdmin').addEventListener('input',()=>{state.supportUrl=$('supportUrlAdmin').value.trim()||'#support';applyLiveAndSupport()});
+ document.querySelector('.adminContent').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;e.preventDefault();const target=b.dataset.tab;if(!document.querySelector('.adminSection[data-section="'+target+'"]'))return;document.querySelectorAll('.adminSection').forEach(sec=>sec.classList.toggle('active',sec.dataset.section===target));document.querySelectorAll('.adminTab').forEach(x=>x.classList.toggle('active',x===b));const content=document.querySelector('.adminContent');if(content)content.scrollTo({top:0,behavior:'smooth'});const overlay=document.getElementById('adminOverlay');if(overlay)overlay.scrollTo({top:0,behavior:'smooth'});});
+ $('siteImageFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;if(f.size>1800000){toast('الصورة كبيرة، اختر صورة أقل من 1.8MB');e.target.value='';return}const r=new FileReader();r.onload=()=>{state.siteImage=r.result;$('siteImageUrl').value='';applySiteImage()};r.readAsDataURL(f)});$('siteImageUrl').addEventListener('input',()=>{if($('siteImageUrl').value.trim()){state.siteImage=$('siteImageUrl').value.trim();applySiteImage()}});
+ $('addClip').addEventListener('click',()=>{const title=$('clipTitle').value.trim();if(!title){toast('اكتب عنوان المقطع أولًا');return}state.clips.push({id:'c'+Date.now(),title,desc:$('clipDesc').value.trim(),link:$('clipLink').value.trim()||'#news',image:$('clipImageUrl').value.trim()||$('clipImageFile').dataset.data||'',type:$('clipType').value});['clipTitle','clipDesc','clipLink','clipImageUrl'].forEach(id=>$(id).value='');$('clipImageFile').value='';delete $('clipImageFile').dataset.data;renderClips();toast('تمت إضافة البطاقة — اضغط حفظ التغييرات');});$('clipImageFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;if(f.size>1200000){toast('اختر صورة أقل من 1.2MB');e.target.value='';return}const r=new FileReader();r.onload=()=>{$('clipImageFile').dataset.data=r.result;toast('تم تجهيز الصورة للإضافة')};r.readAsDataURL(f)});
+ $('clipsAdminList').addEventListener('click',e=>{const del=e.target.closest('[data-delete-clip]'),edit=e.target.closest('[data-edit-clip]');if(del){state.clips.splice(+del.dataset.deleteClip,1);renderClips()}if(edit){const x=state.clips[+edit.dataset.editClip];$('clipTitle').value=x.title;$('clipDesc').value=x.desc;$('clipLink').value=x.link;$('clipImageUrl').value=x.image.startsWith('data:')?'':x.image;$('clipType').value=x.type;$('clipImageFile').dataset.data=x.image;state.clips.splice(+edit.dataset.editClip,1);renderClips();document.querySelector('[data-tab="clips"]').click()}});
+ $('addNews').addEventListener('click',()=>{const title=$('newsTitle').value.trim();if(!title){toast('اكتب عنوان الخبر أولًا');return}state.news.push({id:'n'+Date.now(),date:$('newsDate').value.trim()||'خبر جديد',title,desc:$('newsDesc').value.trim()});['newsTitle','newsDate','newsDesc'].forEach(id=>$(id).value='');renderNews();toast('تمت إضافة الخبر — اضغط حفظ التغييرات')});$('newsAdminList').addEventListener('click',e=>{const del=e.target.closest('[data-delete-news]'),edit=e.target.closest('[data-edit-news]');if(del){state.news.splice(+del.dataset.deleteNews,1);renderNews()}if(edit){const x=state.news[+edit.dataset.editNews];$('newsTitle').value=x.title;$('newsDate').value=x.date;$('newsDesc').value=x.desc;state.news.splice(+edit.dataset.editNews,1);renderNews()}});
+ $('addPlatform').addEventListener('click',()=>{const name=$('platformName').value.trim(),url=$('platformUrl').value.trim();if(!name||!/^https?:\/\//i.test(url)){toast('اكتب اسم المنصة ورابطًا يبدأ بـ https://');return}state.platforms.push({id:'p'+Date.now(),name,url,svg:''});$('platformName').value='';$('platformUrl').value='';renderPlatforms();toast('تمت إضافة المنصة — اضغط حفظ التغييرات')});$('platformAdminList').addEventListener('click',e=>{const del=e.target.closest('[data-delete-platform]'),edit=e.target.closest('[data-edit-platform]');if(del){state.platforms.splice(+del.dataset.deletePlatform,1);renderPlatforms()}if(edit){const x=state.platforms[+edit.dataset.editPlatform];$('platformName').value=x.name;$('platformUrl').value=x.url;state.platforms.splice(+edit.dataset.editPlatform,1);renderPlatforms()}});
+ // saved state load, then render managed sections
+ const saved=safeParse(localStorage.getItem(KEY)||'null');if(saved){state={...state,...saved};const els=stableTextElements();els.forEach((el,i)=>{if(!el.dataset.ms3dhTextKey)el.dataset.ms3dhTextKey='static-'+i;});(state.texts||[]).forEach(x=>{if(!x.key)return;const el=els.find(node=>node.dataset.ms3dhTextKey===x.key);if(el){el.dataset.ar=x.ar;el.dataset.en=x.en}})}
+ // Always remove legacy YouTube entries from previously saved browser data and ensure Kick exists.
+ state.platforms=(state.platforms||[]).filter(x=>!/(youtube|يوتيوب)/i.test(String(x.name||'')));
+ if(!state.platforms.some(x=>/^kick$/i.test(String(x.name||'')))) state.platforms.push({id:'kick-default',name:'Kick',url:'https://kick.com/',svg:''});
+ try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+ $('siteImageUrl').value=state.siteImage.startsWith('data:')?'':state.siteImage;refresh();
+})();
+</script>
+
+</body>
+</html>
+
+<style id="ms3dh-admin-final-polish">
+/* Unified MS3DH red/black control center */
+.adminOverlay{background:rgba(4,4,6,.97);color:#f7f7f8}
+.adminShell{background:linear-gradient(145deg,#151113,#080809 82%);border-color:#4a2225;box-shadow:0 28px 100px #000c,0 0 0 1px #e5252a12}
+.adminTop{background:#100b0c;border-bottom-color:#482024}
+.adminBrandMark,.adminDashIcon{background:linear-gradient(145deg,#3b1014,#16090b)!important;border-color:#8f252b!important;color:#ff777b!important}
+.adminEyebrow,.adminStats span,.adminSectionTitle span{color:#ff666b!important}
+.adminWelcome{background:linear-gradient(120deg,#281013,#100d0f 75%);border-color:#743036}
+.adminWelcome:after{background:#e5252a}
+.adminStats>div,.adminDashCard,.adminItem{background:linear-gradient(145deg,#191315,#0e0c0d)!important;border-color:#3c2629!important}
+.adminDashCard{cursor:pointer;position:relative;transition:transform .18s,border-color .18s,box-shadow .18s}
+.adminDashCard:hover,.adminDashCard:focus-visible{transform:translateY(-2px);border-color:#e5252a!important;box-shadow:0 8px 24px #e5252a17;outline:none}
+.adminDashCard:active{transform:scale(.985)}
+.adminDashCard>b{color:#ff555b!important}
+.adminTab.active,.adminBack{background:linear-gradient(135deg,#431217,#1b0b0d)!important;border-color:#e5252a!important;color:#fff!important}
+.adminBtn.primary{background:linear-gradient(135deg,#f12c32,#8e1018)!important;border-color:#ff4a50!important;color:#fff!important}
+.adminBtn{background:#1b1113;border-color:#503034;color:#f8eeee}
+.adminBtn:hover{border-color:#e5252a!important}
+.adminDanger{color:#ff9a9e!important;border-color:#87383d!important}
+.adminFootnote{border-right-color:#e5252a;background:#1a0e10;color:#d6bfc1}
+.adminSection{display:none!important}.adminSection.active{display:block!important;animation:adminReveal .22s ease-out}
+.adminContent{display:block;min-height:50vh}
+.adminSectionTitle{color:#fff}
+.adminField input:focus,.adminField textarea:focus,.adminField select:focus{outline:1px solid #e5252a;border-color:#e5252a}
+.adminLaunch{background:linear-gradient(135deg,#f02a31,#850d15 72%,#090909)!important;border:1px solid #ff5157!important;color:#fff!important}
+.brand .badgeicon.has-brand-image{background-size:cover;background-position:center;border-color:#e5252a;box-shadow:0 0 0 3px #e5252a25}
+:root[data-theme="day"] .adminOverlay{background:rgba(8,5,6,.96);color:#fff}
+:root[data-theme="day"] .adminShell,:root[data-theme="day"] .adminTop{background:#110b0c;color:#fff}
+:root[data-theme="day"] .adminDashCard,:root[data-theme="day"] .adminStats>div,:root[data-theme="day"] .adminItem{background:linear-gradient(145deg,#211416,#100c0d)!important;color:#fff}
+:root[data-theme="day"] .adminField input,:root[data-theme="day"] .adminField textarea,:root[data-theme="day"] .adminField select{background:#090708;color:#fff}
+@keyframes adminReveal{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.adminSection.active{animation:none}}
+</style>
+
+<style id="ms3dh-live-support-update">
+#supportNavBtn{display:inline-flex;align-items:center;justify-content:center;color:#ff555b;border-color:#7d272c;background:linear-gradient(135deg,#240b0d,#090909);font-weight:800;border-radius:5px;padding:8px 12px}#supportNavBtn:hover{background:#c81924;color:#fff;border-color:#ff555b;transform:translateY(-1px)}:root[data-theme="day"] #supportNavBtn{background:linear-gradient(135deg,#fff0f0,#fff);color:#b4111b;border-color:#d66b70}#live .liveInfo .eyebrow .dot{color:#ff3038}#live .liveInfo h3{color:var(--text)}.brand .badgeicon.has-brand-image{clip-path:none!important;border-radius:10px;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;overflow:hidden;width:42px;height:42px;flex:0 0 42px}.brand .badgeicon{font-size:0}.brand .badgeicon:not(.has-brand-image)::before{content:'✦';font-size:23px}@media(max-width:760px){#supportNavBtn{font-size:10px;padding:8px 7px}}
+</style>
+
+<style id="ms3dh-final-polish">
+/* Header: brand on the right, controls grouped at the far left */
+.nav{direction:rtl;display:flex;align-items:center;gap:clamp(7px,1vw,16px)}
+.nav .brand{order:1;margin-inline-start:0}
+.nav .navlinks{order:2}
+.nav .navright{order:3;margin-inline-start:auto;direction:rtl;gap:7px}
+.navright button,.navright a{transition:transform .22s ease,border-color .22s ease,background .22s ease}
+.navright button:hover,.navright a:hover{transform:translateY(-2px);border-color:#ff4545}
+.platformLink svg{display:block!important;visibility:visible!important;opacity:1!important;fill:currentColor!important;color:#ff4545!important;width:36px!important;height:36px!important;flex-shrink:0}
+.platformLink svg path{fill:currentColor!important}
+.platformLink[aria-label="TikTok"] svg{width:38px!important;height:38px!important;color:#ff4545!important;filter:drop-shadow(2px 0 #25f4ee) drop-shadow(-2px 0 #fe2c55)}
+/* No pop-up confirmations while editing */
+#toast,.adminToast{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+/* Livelier but subtle motion */
+@keyframes ms3dhFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes ms3dhGlow{0%,100%{box-shadow:0 0 0 rgba(255,69,69,0)}50%{box-shadow:0 0 24px rgba(255,69,69,.14)}}
+.badgeicon{animation:ms3dhGlow 4s ease-in-out infinite}
+.platformLink{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease!important}
+.platformLink:hover{transform:translateY(-6px) scale(1.015)!important;box-shadow:0 12px 32px #ff45451c!important;border-color:#ff4545!important}
+.stat{transition:transform .25s ease,border-color .25s ease}
+.stat:hover{transform:translateY(-4px);border-color:#ff4545}
+.hero:before{animation:heroGridDrift 24s linear infinite}
+@keyframes heroGridDrift{from{background-position:0 0,0 0}to{background-position:0 96px,160px 0}}
+@media(max-width:1050px){.nav{flex-wrap:wrap}.nav .brand{order:1}.nav .navright{order:3;margin-inline-start:auto}.nav .navlinks{order:2;flex-basis:100%;max-width:100%}}
+@media(max-width:600px){.nav{padding:10px 12px;gap:8px}.nav .brand{order:3}.nav .navright{order:1;margin-inline-start:auto;gap:4px}.nav .navlinks{order:2}.navright .lang{padding:7px 6px;font-size:9px}.platformLink svg{width:30px!important;height:30px!important}}
+@media(prefers-reduced-motion:reduce){.badgeicon,.hero:before{animation:none!important}.platformLink,.stat{transition:none!important}}
+</style>
+<script id="ms3dh-silent-edit-fixes">
+// Suppress existing toast helpers so editing never triggers distracting messages.
+window.addEventListener('DOMContentLoaded',()=>{
+  try { window.notify = function(){}; } catch(e) {}
+  document.querySelectorAll('#toast,.adminToast').forEach(el=>{el.classList.remove('show');el.setAttribute('aria-hidden','true')});
+});
+</script>
+
+
+<style id="ms3dh-requested-final-fixes">
+/* Keep the controls at the far LEFT of the same header strip and the brand at the far RIGHT. */
+header .nav{direction:ltr!important;display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:clamp(4px,1vw,12px)!important;width:100%!important}
+header .nav .navright{order:1!important;margin-left:0!important;margin-right:auto!important;direction:rtl!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:clamp(3px,.6vw,8px)!important;flex:0 0 auto!important}
+header .nav .navlinks{order:2!important;direction:rtl!important;flex:1 1 auto!important;min-width:0!important}
+header .nav .brand{order:3!important;margin-left:0!important;margin-right:0!important;flex:0 0 auto!important;white-space:nowrap!important}
+header .nav .brand>span:last-child{white-space:nowrap!important}
+header .navright button,header .navright a{white-space:nowrap!important}
+.platformLink svg{display:block!important;width:36px!important;height:36px!important;fill:#ff4545!important;color:#ff4545!important;visibility:visible!important;opacity:1!important;flex-shrink:0!important}
+.platformLink svg path{fill:currentColor!important}
+.platformLink[aria-label="TikTok"] svg{width:38px!important;height:38px!important;filter:drop-shadow(2px 0 #25f4ee) drop-shadow(-2px 0 #fe2c55)!important}
+#toast,.toast,.adminToast{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+@media(max-width:1050px){header .nav{flex-wrap:nowrap!important}header .nav .navlinks{display:none!important}header .nav .navlinks.open{display:flex!important;position:absolute!important;top:100%!important;left:0!important;right:0!important;z-index:30!important;flex-direction:column!important;max-height:65vh!important;overflow:auto!important;background:var(--bg,#09090b)!important;border-bottom:1px solid var(--line)!important;padding:8px 14px!important}header .nav .navright{order:1!important;margin-right:auto!important}header .nav .brand{order:3!important;margin-left:0!important;margin-right:0!important}header .nav .menuBtn{display:block!important}}
+@media(max-width:600px){header .nav{padding:10px 12px!important;gap:4px!important}header .nav .navright{gap:3px!important}header .nav .brand{margin-left:0!important;margin-right:0!important}header .nav .brand strong{font-size:11px!important}header .nav .brand small{display:none!important}header .nav .badgeicon,header .nav .brand .badgeicon.has-brand-image{width:32px!important;height:32px!important;flex:0 0 32px!important}header .navright .lang,header .navright .menuBtn{padding:5px 6px!important;min-height:30px!important;font-size:9px!important}.platformLink svg{width:30px!important;height:30px!important}.platformLink[aria-label="TikTok"] svg{width:32px!important;height:32px!important}}
+</style>

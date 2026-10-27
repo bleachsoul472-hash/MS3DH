@@ -1,1 +1,0 @@
-import {json,readJson,requireAdmin} from '../../_lib.js';export async function onRequestDelete({request,env}){const a=await requireAdmin(request,env);if(a.error)return a.error;const d=await readJson(request);await env.DB.prepare('DELETE FROM requests WHERE id=?').bind(d.id||'').run();return json({ok:true})}

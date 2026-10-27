@@ -1,1 +1,0 @@
-import {json,getSession} from '../../_lib.js';export async function onRequestGet({request,env}){const user=await getSession(request,env);return json({user:user?{id:user.id,username:user.username,avatar:user.avatar}:null})}

@@ -1,1 +1,0 @@
-import {json,cookie} from '../../_lib.js';export async function onRequestPost(){return new Response(JSON.stringify({ok:true}),{headers:{'content-type':'application/json','set-cookie':cookie('pd_session','',0)}})}
